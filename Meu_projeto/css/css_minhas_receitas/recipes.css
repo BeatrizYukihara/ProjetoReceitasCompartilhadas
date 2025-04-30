@@ -1,0 +1,58 @@
+/* 
+  RECIPES STYLES - Este arquivo contém os estilos relacionados às receitas, incluindo o estilo dos 
+  cards de receitas e o layout de lista de receitas. Ele também trata dos efeitos ao passar o mouse 
+  sobre os cards e do layout responsivo.
+*/
+
+#recipesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    max-height: 580px;
+    overflow-y: auto; /* Permite rolar se a lista de receitas for maior que a área */
+  }
+  
+  /* Estilo base para o card de receita */
+  .recipe-card {
+    background: #fff6d6; /* Cor de fundo do card (tom de amarelo suave) */
+    border: 1px solid #f2c24f; /* Borda dourada do card */
+    border-radius: 10px; /* Cantos arredondados */
+    padding: 15px; /* Espaçamento interno */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor */
+    height: 150px; /* Altura fixa */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui os itens dentro do card */
+    transition: all 0.3s ease; /* Transição suave para hover e mudanças de estilo */
+    cursor: pointer; /* Cursor de "mãozinha" indicando que é clicável */
+  }
+  
+  /* Efeito ao passar o cursor sobre o card */
+  .recipe-card:hover {
+    transform: scale(1.00); /* Expande o card suavemente */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Aumenta a sombra, criando efeito de flutuação */
+  }
+  
+  /* Estilo do título da receita */
+  .recipe-title {
+    font-size: 24px; /* Tamanho da fonte */
+    color: #704214; /* Cor marrom */
+    margin-bottom: 10px; /* Espaçamento inferior */
+  }
+  
+  /* Estilo para a seção que mostra o tipo da receita */
+  .recipe-type {
+    font-size: 14px; /* Tamanho da fonte */
+    color: #888; /* Cor cinza claro */
+    margin-top: auto; /* Empurra a seção para o final do card */
+    display: flex; /* Alinha os itens horizontalmente */
+    align-items: center; /* Centraliza verticalmente os itens */
+  }
+  
+  /* Estilo para o ícone do tipo da receita */
+  .recipe-type img {
+    width: 40px; /* Largura do ícone */
+    height: 40px; /* Altura do ícone */
+    margin-right: 10px; /* Espaçamento à direita do ícone */
+  }
+  

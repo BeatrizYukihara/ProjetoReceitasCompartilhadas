@@ -1,0 +1,21 @@
+/* 
+  FILTER STYLES - Define os estilos para os filtros de busca, incluindo campos de entrada e seleção.
+  Este estilo facilita a organização dos filtros, garantindo que o layout seja responsivo e organizado.
+*/
+
+.filters {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .filters input, .filters select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex: 1;
+  }
+  
