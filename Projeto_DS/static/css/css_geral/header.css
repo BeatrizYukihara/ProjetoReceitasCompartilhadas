@@ -1,0 +1,47 @@
+/* 
+  HEADER STYLES - Este arquivo define o estilo para o cabeçalho (header) e rodapé (footer).
+  Ele inclui a formatação da barra de navegação, a disposição do conteúdo e a personalização 
+  do logo circular fixo no topo.
+*/
+
+header, footer {
+  background-color: #F8CA66; /* Cor de fundo do cabeçalho e rodapé */
+  color: #fff;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  text-align: center; /* Centraliza o texto no rodapé */
+}
+
+.header-content, .footer-content {
+  max-width: 960px; /* Define um limite de largura */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.logo-circle {
+  position: absolute;
+  top: 00px;
+  right: 0px;
+  width: 180px;
+  height: 180px;
+  background-color: #F8CA66;
+  border-radius: 50%; /* Forma circular */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo-circle img {
+  width: 80%;
+  object-fit: contain;
+}

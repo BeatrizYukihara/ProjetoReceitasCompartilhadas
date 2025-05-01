@@ -1,0 +1,75 @@
+  /* Grid layout para as linhas do cardápio */
+  .grid-linhas {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr; /* Uma coluna para o dia */
+    padding-bottom: 2rem; /* Adiciona um pequeno espaço para evitar que o footer fique colado */
+  }
+  
+  /* Cabeçalho das linhas (segunda-feira, terça-feira, etc.) */
+  .linha-header,
+  .linha-dia {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, 1fr); /* 1 coluna para o dia, 4 para as refeições */
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  /* Estilo para o nome do dia (ex: Segunda-feira) */
+  .celula-label {
+    font-weight: bold;
+    text-align: left;
+    padding-left: 0.5rem;
+  }
+  
+  /* Estilo das células para as refeições */
+  .celula-refeicao,
+  .celula-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0.8rem;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  /* Cabeçalho das refeições */
+  .linha-header .celula-refeicao {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  
+  /* Responsividade para telas pequenas */
+  @media (max-width: 768px) {
+    .linha-header, .linha-dia {
+      grid-template-columns: 1fr repeat(2, 1fr); /* Ajusta para duas colunas nas telas menores */
+    }
+  
+    .logo-circle {
+      width: 120px;
+      height: 120px;
+      margin-top: -30px;
+    }
+  }
+  
+    /* Garantir que o conteúdo ocupe toda a altura da página */
+    html, body {
+        height: 100%;  /* Garante que o conteúdo ocupe toda a altura da tela */
+        margin: 0;     /* Remove as margens padrão */
+    }
+    
+    body {
+        display: flex;
+        flex-direction: column; /* Organiza o conteúdo verticalmente */
+    }
+    
+    .container {
+        flex: 1; /* Faz o container ocupar o espaço restante da página */
+    }
+    
+    footer {
+        margin-top: auto; /* Garante que o footer ficará no final da página */
+    }
+  
+  

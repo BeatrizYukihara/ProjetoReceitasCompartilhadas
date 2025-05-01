@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardápio Semanal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="static/css/css_geral/reset.css">
+  <link rel="stylesheet" href="static/css/css_geral/global.css">
+  <link rel="stylesheet" href="static/css/css_geral/header.css">
+  <link rel="stylesheet" href="static/css/css_geral/container.css">
+  <link rel="stylesheet" href="static/css/css_geral/navigation.css">
+  <link rel="stylesheet" href="static/css/css_geral/add_and_delete.css">  <link rel="stylesheet" href="static/css/css_geral/add_and_delete.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title" id="usuarioTitulo"></div>
+    </div>
+  </header>
+
+  <div class="logo-circle">
+    <img src="static/imagens/Logo_site_trabalho.png" alt="Logo do Site"/>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="nav-options">
+        <a href="minhas_receitas.html" class="option">Minhas Receitas</a>
+        <span class="option active">Precificar Receita</span>
+        <a href="amigos.html" class="option">Amigos</a>
+        <a href="cardapio.html" class="option">Cardápio Semanal</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>Feito com ❤️</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<script>
+    const usuario = "Ana";
+    document.getElementById('usuarioTitulo').textContent = `Olá, ${usuario}!`;
+</script>    
