@@ -1,4 +1,8 @@
-const usuario = "João";
+const usuario = "João"; //TEM QUE MUDAR ISSO
+const usuario_id = 1 //TEM QUE MUDAR ISSO
+
+
+
 document.getElementById('usuarioTitulo').textContent = `Olá, ${usuario}!`;
 
 const icons = {
@@ -126,7 +130,7 @@ function fecharModal() {
 searchInput.addEventListener('input', () => renderReceitas(receitas));
 typeFilter.addEventListener('change', () => renderReceitas(receitas));
 
-fetch('/get_receitas')
+fetch(`/get_receitas/${usuario_id}`)
   .then(res => res.json())
   .then(data => {
     receitas = data;
