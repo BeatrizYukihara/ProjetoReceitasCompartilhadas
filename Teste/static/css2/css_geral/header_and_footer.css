@@ -1,0 +1,79 @@
+/* 
+  HEADER STYLES - Estilização do cabeçalho
+  Define a aparência visual da seção de cabeçalho da página, incluindo cores,
+  posicionamento e elementos como o título e o logotipo circular.
+*/
+
+header {
+  background-color: #F8CA66; /* Cor de fundo do cabeçalho */
+  color: #fff;               /* Cor do texto (branca) */
+  padding: 20px;             /* Espaçamento interno em todos os lados */
+  width: 100%;               /* Largura total da página */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra suave abaixo do cabeçalho */
+  text-align: center;        /* Centraliza o texto no cabeçalho */
+}
+
+.header-content {
+  max-width: 960px;          /* Largura máxima do conteúdo */
+  margin: 0 auto;            /* Centraliza horizontalmente */
+  display: flex;             /* Usa Flexbox para alinhamento */
+  justify-content: center;   /* Alinha horizontalmente ao centro */
+  align-items: center;       /* Alinha verticalmente ao centro */
+}
+
+.header-title {
+  font-weight: bold;         /* Deixa o texto em negrito */
+  font-size: 36px;           /* Define o tamanho da fonte do título */
+}
+
+/* 
+  Estilo do logotipo circular que fica fixo no canto superior direito.
+  Usa posicionamento absoluto para colocá-lo fora do fluxo normal do layout.
+*/
+.logo-circle {
+  position: absolute;        /* Posicionamento absoluto na tela */
+  top: 0px;                  /* Alinha ao topo da página */
+  right: 0px;                /* Alinha à direita da página */
+  width: 180px;              /* Largura do círculo */
+  height: 180px;             /* Altura do círculo (forma um círculo com o border-radius) */
+  background-color: #F8CA66; /* Cor de fundo do logotipo */
+  border-radius: 50%;       /* Torna o elemento completamente circular */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+  display: flex;             /* Flexbox para centralizar a imagem */
+  justify-content: center;   /* Centraliza horizontalmente */
+  align-items: center;       /* Centraliza verticalmente */
+  overflow: hidden;          /* Esconde qualquer parte da imagem que ultrapasse o círculo */
+}
+
+.logo-circle img {
+  width: 80%;                /* A imagem ocupa 80% do círculo */
+  object-fit: contain;       /* Mantém proporções sem cortar a imagem */
+}
+
+
+
+
+/* 
+  FOOTER STYLES - Estilização do rodapé
+  Define o visual do rodapé, com estilo semelhante ao cabeçalho,
+  para manter consistência visual.
+*/
+
+footer {
+  background-color: #F8CA66; /* Cor de fundo igual à do cabeçalho */
+  color: #fff;               /* Cor do texto */
+  padding: 20px;             /* Espaçamento interno */
+  width: 100%;               /* Largura total */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra semelhante ao cabeçalho */
+  text-align: center;        /* Centraliza o texto */
+  margin-top: auto;          /* Força o rodapé a ir para o final */
+}
+
+.footer-content {
+  max-width: 960px;          /* Largura máxima */
+  margin: 0 auto;            /* Centraliza o conteúdo */
+  display: flex;             /* Usa Flexbox */
+  justify-content: center;   /* Centraliza horizontalmente */
+  align-items: center;       /* Alinha verticalmente */
+}
+
