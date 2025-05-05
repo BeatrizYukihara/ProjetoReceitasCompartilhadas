@@ -12,9 +12,8 @@ def connect_db():
 def index():
     return render_template('precificar.html')
 
-@app.route('/get_receitas', methods=['GET'])
-def get_receitas():
-    usuario_id = '1'
+@app.route('/get_receitas/<int:usuario_id>', methods=['GET'])
+def get_receitas(usuario_id):
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM receitas WHERE usuario_id = ?', (usuario_id,))
@@ -26,15 +25,8 @@ def get_receitas():
 def get_ingredientes(receita_id):
     conn = connect_db()
     cursor = conn.cursor()
-    print("\n")
-    print("\n")
-    print(receita_id)
-    print("\n")
-    print("\n")
     cursor.execute('SELECT * FROM ingredientes WHERE receita_id = ?', (receita_id,))
     ingredientes = [dict(row) for row in cursor.fetchall()]
-    print("\n")
-    print("\n")
     print(ingredientes)
     conn.close()
     return jsonify(ingredientes)
