@@ -1,0 +1,33 @@
+/* Modal de sucesso (exclusão) */
+.modal-sucesso {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #d4edda;  /* Verde claro */
+    color: #155724;             /* Verde escuro */
+    border: 2px solid #28a745;  /* Verde borda */
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: none; /* Oculto por padrão */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 999;
+    font-weight: bold;
+    font-size: 1rem;
+    animation: fadeInOut 4s forwards;
+  }
+  
+  .modal-sucesso .icone-cifrao {
+    width: 40px;
+    height: 40px;
+  }
+  
+  @keyframes fadeInOut {
+    0%   { opacity: 0; transform: translateY(-10px); }
+    10%  { opacity: 1; transform: translateY(0); }
+    90%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+  }
+  

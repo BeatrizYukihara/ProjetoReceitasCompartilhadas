@@ -1,0 +1,72 @@
+/* 
+  BOTAO ADICIONAR E DELETAR- Define os estilos para botões com ícones, incluindo efeitos de hover e a tooltip de ajuda.
+  Este estilo garante que os botões com ícones tenham uma interação visual agradável, incluindo o efeito de zoom ao passar o mouse
+  e uma tooltip que exibe informações adicionais sobre o botão.
+*/
+
+/* Estilos gerais para o botão de ícone */
+.icone_botao {
+    position: relative;  /* Necessário para posicionar a tooltip em relação ao botão */
+    width: 40px;         /* Largura do botão */
+    height: 40px;        /* Altura do botão */
+    cursor: pointer;     /* Define o cursor como 'pointer' para indicar que o botão é clicável */
+  }
+  
+.icone_botao.add {
+        background-color: #6efa72; /* Verde para adicionar */
+        border-radius: 10px;
+    }
+
+.icone_botao.delete {
+        background-color: #e49994; /* Vermelho para excluir */
+        border-radius: 10px;
+    }
+
+.icone_botao.prancheta {
+      background-color: #b4aca8; /* Vermelho para excluir */
+      border-radius: 5px;
+  }    
+
+
+  /* Estilos para a imagem dentro do botão */
+  .icone_botao img {
+    width: 100%;          /* A imagem ocupará 100% da largura do botão */
+    height: 100%;         /* A imagem ocupará 100% da altura do botão */
+    object-fit: contain;  /* A imagem será ajustada para caber dentro do botão sem distorcer */
+    transition: transform 0.2s; /* Adiciona uma transição suave para a transformação da imagem (efeito de zoom) */
+  }
+  
+  /* Efeito de hover - aumenta o tamanho da imagem quando o mouse passa sobre o botão */
+  .icone_botao:hover img {
+    transform: scale(1.1); /* A imagem será ampliada 10% quando o mouse passar sobre o botão */
+  }
+
+
+
+  
+/* Estilos para a tooltip que aparece ao passar o mouse sobre o botão */
+/* Pequena caixa de texto que aparece quando o usuário passa o mouse */
+.caixa_de_texto_botao {
+    visibility: hidden;   /* Inicialmente, a tooltip está oculta */
+    width: max-content;    /* A largura da tooltip será ajustada ao tamanho do conteúdo */
+    background-color: #333; /* Cor de fundo escura para a tooltip */
+    color: #fff;           /* Cor do texto branco */
+    text-align: center;    /* O texto da tooltip será centralizado */
+    padding: 5px 8px;      /* Espaçamento interno (padding) da tooltip */
+    border-radius: 5px;    /* Bordas arredondadas para a tooltip */
+    position: absolute;    /* A tooltip será posicionada absolutamente em relação ao botão */
+    z-index: 1;            /* A tooltip ficará acima do botão */
+    bottom: -35px;         /* A tooltip ficará 35px abaixo do botão */
+    left: 50%;             /* A tooltip será centralizada horizontalmente em relação ao botão */
+    transform: translateX(-50%); /* Ajusta a posição da tooltip para que ela esteja centralizada */
+    font-size: 0.8rem;     /* Tamanho de fonte reduzido para a tooltip */
+    opacity: 0;            /* Inicialmente, a tooltip é invisível */
+    transition: opacity 0.3s; /* A transição da opacidade será suave ao aparecer e desaparecer */
+  }
+  
+  /* Quando o botão é hoverado, a tooltip se torna visível */
+  .icone_botao:hover .caixa_de_texto_botao  {
+    visibility: visible;   /* Torna a tooltip visível */
+    opacity: 1;            /* Torna a tooltip completamente opaca (visível) */
+  }
+  

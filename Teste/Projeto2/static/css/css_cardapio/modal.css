@@ -1,0 +1,135 @@
+/* 
+  MODAL STYLE - Estilos para o modal responsável por adicionar refeições
+  ao cardápio
+*/
+
+
+/* Define o estilo geral da área escura atrás do modal */
+.modal {
+    position: fixed; /* Fica fixo na tela, mesmo se a pessoa rolar a página */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa toda a largura da tela */
+    height: 100%; /* Ocupa toda a altura da tela */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
+    display: flex; /* Permite centralizar o conteúdo com flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    z-index: 9999; /* Garante que o modal fique por cima de tudo */
+  }
+  
+  /* Estilo da caixa branca (o conteúdo do modal) */
+  .modal-content {
+    background-color: #fff; /* Fundo branco */
+    padding: 2rem; /* Espaçamento interno (respiro) */
+    width: 90%; /* Largura de 90% da tela (em dispositivos pequenos) */
+    max-width: 500px; /* Não ultrapassa 500px em telas grandes */
+    border-radius: 12px; /* Cantos arredondados */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Sombra para parecer flutuante */
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out; /* Aparecer suavemente com animação */
+  }
+  
+  /* Título do modal */
+  .modal-content h3 {
+    margin-top: 0; /* Remove margem de cima */
+    font-size: 1.5rem; /* Tamanho da fonte grande */
+    color: #b67514; /* Cor alaranjada */
+  }
+  
+  /* Rótulos (textos acima dos campos) */
+  .modal-content label {
+    display: block; /* Faz com que cada label ocupe sua própria linha */
+    margin-top: 1rem; /* Espaço acima do label */
+    font-weight: bold; /* Texto em negrito */
+    color: #f89c24; /* Cor laranja clara */
+  }
+  
+  /* Estilo das caixas de seleção (select) */
+  .modal-content select {
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 0.4rem; /* Espaço interno */
+    margin-top: 0.3rem; /* Espaço acima do campo */
+    border-radius: 6px; /* Bordas arredondadas */
+    border: 1px solid #ccc; /* Borda cinza clara */
+  }
+  
+  /* Estilo dos botões */
+  .modal-content button {
+    padding: 0.4rem 0.8rem; /* Espaço interno: altura e largura */
+    background-color: #e6703a; /* Cor de fundo laranja escuro */
+    color: white; /* Texto branco */
+    border: none; /* Sem borda */
+    border-radius: 6px; /* Cantos arredondados */
+    cursor: pointer; /* Mostra o cursor de clique */
+    transition: background-color 0.2s ease-in-out; /* Suaviza mudança de cor ao passar o mouse */
+  }
+  
+  /* Quando o mouse passa por cima de um botão */
+  .modal-content button:hover {
+    background-color: #45a049; /* Muda a cor para verde escuro */
+  }
+  
+  /* Estilo especial para o primeiro botão (Cancelar) */
+  .modal-content button:nth-child(1) {
+    background-color: #ccc; /* Cinza claro */
+    margin-right: 0.5rem; /* Espaço à direita */
+  }
+  
+  /* Efeito ao passar o mouse no botão de Cancelar */
+  .modal-content button:nth-child(1):hover {
+    background-color: #bbb; /* Cinza um pouco mais escuro */
+  }
+  
+  /* Esconde o modal quando a condição x-cloak do Alpine.js está ativa */
+  [x-cloak] {
+    display: none !important;
+  }
+  
+  /* Animação de entrada do modal: aparece de baixo para cima com fade */
+  @keyframes fadeIn {
+    from {
+      opacity: 0; /* Começa invisível */
+      transform: translateY(-10px); /* Um pouco acima da posição final */
+    }
+    to {
+      opacity: 1; /* Totalmente visível */
+      transform: translateY(0); /* Posição final */
+    }
+  }
+
+
+  .autocomplete-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .autocomplete-input {
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .autocomplete-list {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 0.2rem;
+  }
+  
+  .autocomplete-item {
+    padding: 0.4rem;
+    cursor: pointer;
+  }
+  
+  .autocomplete-item:hover {
+    background-color: #eee;
+  }
+  
+  

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Consultas Médicas</title>
+    <link rel="stylesheet" href="/static/css/css_login/css_login.css">
+</head>
+<body>
+
+    {% with mensagens=get_flashed_messages() %}
+        {% if mensagens %}
+            <div class="flash_alerta">
+                {% for mensagem in mensagens %}
+                    <p>{{ mensagem }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="page">
+        <form method="POST" class="formLogin" action="/login" aria-label="Formulário de Login">
+            <h1>Login</h1>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Digite seu email" required autofocus>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            <input type="submit" value="Entrar" class="btn">
+        </form>
+    </div>
+</body>
+</html>
