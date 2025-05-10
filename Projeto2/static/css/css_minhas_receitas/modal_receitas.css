@@ -1,0 +1,195 @@
+/*
+MODAL RECEITAS STYLES - Define o estilo para o modal, incluindo seu layout, animações e botões de controle.
+Este modal pode ser utilizado para exibir informações detalhadas sobre as receitas, como ingredientes
+e modos de preparo.
+*/
+
+/* 1. Estilo da camada de fundo do modal de receitas (escurece a tela e centraliza o conteúdo) */
+.modal_receitas {
+    display: none; /* Modal oculto por padrão */
+    position: fixed; /* Fixa o modal na tela, sobrepondo tudo */
+    z-index: 1000; /* Garante que fique acima de todos os outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com opacidade */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 20px; /* Espaçamento interno */
+}
+
+/* 2. Caixa branca do conteúdo do modal de receitas */
+.modal_receitas-content {
+    background: white; /* Fundo branco */
+    border-radius: 12px; /* Cantos arredondados */
+    max-width: 900px; /* Largura máxima do modal */
+    width: 100%; /* Preenche toda a largura disponível até 900px */
+    max-height: 90vh; /* Altura máxima de 90% da viewport */
+    overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+    padding: 30px; /* Espaçamento interno */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra suave para dar profundidade */
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+    word-wrap: break-word; /* Quebra palavras longas */
+    word-break: break-word; /* Força quebra em palavras compridas */
+    white-space: pre-line; /* Mantém quebras de linha (\n) e espaços extras */
+}
+
+/* 3. Cabeçalho do modal com título e botão de fechar */
+.modal_receitas-header {
+    display: flex; /* Alinha itens lado a lado */
+    justify-content: space-between; /* Espaço entre título e botão */
+    align-items: center; /* Centraliza verticalmente */
+    border-bottom: 2px solid #f0f0f0; /* Linha inferior separadora */
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    font-family: 'Handlee', cursive;
+}
+
+/* 4. Título do modal de receitas */
+.modal_receitas-header h2 {
+    font-size: 50px;
+    font-weight: bold;
+    color: #69450f;
+}
+
+/* 5. Bloco das porções e tempo de preparo */
+.modal_receitas-info {
+    display: flex;
+    max-width: 500px; /* Largura máxima do modal */
+    gap: 20px; /* Espaço entre os cards */
+    margin-bottom: 10px;
+    flex-wrap: wrap; /* Permite que quebre linha em telas pequenas */
+}
+
+/* 6. Botão de fechar (X) */
+.close-btn {
+    font-size: 50px;
+    cursor: pointer; /* Muda o cursor para ponteiro */
+    color: #999;
+    transition: color 0.3s ease; /* Transição suave na mudança de cor */
+}
+
+.close-btn:hover {
+    color: #333; /* Escurece ao passar o mouse */
+}
+
+/* 7. Estilo para os ícones ao lado de "Porções" e "Tempo de Preparo" */
+.info-card img.info-icon {
+    width: 30px; /* Ajuste o tamanho das imagens conforme necessário */
+    height: auto;
+    margin-right: 10px; /* Espaçamento entre a imagem e o texto */
+}
+
+/* 8. Ajuste a cor do ícone ao passar o mouse */
+.info-card:hover i {
+    color: #F8CA66; /* Altere a cor do ícone quando o mouse passar por cima */
+}
+
+/* 9. Cartões individuais com ícone e texto */
+/* EX: Porções e tempo de preparo */
+.info-card {
+    background: #eee9e973;
+    border-radius: 10px;
+    padding: 4px 2px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 200px; /* Cresce ou encolhe conforme o espaço disponível */
+}
+
+/* 10. Título do Porções e Tempo de preparo*/
+.info-label {
+    font-size: 15px;
+    color: #888;
+    margin-bottom: 0px;
+}
+
+/* 11. Valor destacado (ex: "4 porções" e "40 minutos") */
+.info-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 12. Área com colunas para ingredientes e utensílios */
+.modal_receitas-columns {
+    display: flex;
+    gap: 30px; /* Espaçamento entre as colunas */
+    flex-wrap: wrap; /* Quebra em telas menores */
+    margin-bottom: 0px;
+}
+
+/* 13. Cada coluna */
+.modal_receitas-section {
+    flex: 1; /* Ocupa espaço igual */
+}
+
+/* 14. Título de cada seção (Ingredientes, Utensílios etc.) */
+.modal_receitas-section h3 {
+    font-size: 23px;
+    color: #F8CA66;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+}
+
+/* 15. Estilo da lista de inegredientes e utensílios */
+/* Texto dos igredientes  utensilios */
+.custom-list {
+    padding-left: 16px;
+    list-style-type: disc; /* Marcadores padrão */
+    color: #444;
+}
+
+/* estilo da bolinha (tópico) */
+.custom-list li::marker {
+    color: #F8CA66; /* Nova cor da bolinha */
+    font-size: 30px; /* Tamanho da bolinha, se desejar ajustar */
+}
+
+/* 16. Itens da lista com espaçamento e quebra de palavra */
+.custom-list li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+    word-break: break-word; /* Evita quebra da tela com palavras longas */
+}
+
+/* 17. Texto do modo de preparo */
+.modal_receitas-list {
+    font-size: 17px;
+    color: #444;
+    line-height: 1.6;
+    padding-left: 35px; /* Espaço para a bolinha */
+    word-break: break-word;
+}
+
+.modal_receitas-list li {
+    list-style-type: none; /* Remove o marcador padrão */
+    position: relative; /* Para poder adicionar o número e o marcador */
+    margin-bottom: 30px; /* Distância entre os passos */
+}
+
+.modal_receitas-list li::before {
+    content: counter(step); /* Número do passo */
+    counter-increment: step; /* Incrementa o número do passo */
+    position: absolute;
+    left: -50px; /* Posição da bolinha */
+    top: 50%; /* Alinha verticalmente */
+    transform: translateY(-50%); /* Ajusta para que o número fique centrado na bolinha */
+    font-size: 19px; /* Tamanho do número */
+    font-weight: bold;
+    color: white; /* Cor do número (dentro da bolinha) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Tamanho da bolinha */
+    height: 30px; /* Tamanho da bolinha */
+    border-radius: 50%; /* Faz a bolinha redonda */
+    background-color: #F8CA66; /* Cor da bolinha */
+    text-align: center; /* Centraliza o texto dentro da bolinha */
+}
+
+.modal_receitas-list {
+    counter-reset: step; /* Reseta o contador de passos */
+}

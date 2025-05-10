@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Consultas Médicas</title>
+    <link rel="stylesheet" href="/static/css/css_login/css_login.css">
+</head>
+    <header>
+        <div class="header-content">
+        
+        </div>
+    </header>
+
+    <div class="logo-circle">
+        <img src="/static/imagens/Logo_site_trabalho.png" alt="Logo do Site"/>
+    </div>
+<body>
+    <div class="page">
+            {% with mensagens=get_flashed_messages() %}
+                {% if mensagens %}
+                    <div class="flash_alerta">
+                        {% for mensagem in mensagens %}
+                            <p>{{ mensagem }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+    
+            <div class="page">
+                <form method="POST" class="formLogin" action="/login" aria-label="Formulário de Login">
+                    <h1>Login</h1>
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Digite seu email" required autofocus>
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                    <input type="submit" value="Entrar" class="btn">
+                </form>
+            </div>
+            <div class="registerLinks">
+                <a href="{{ url_for('cadastro') }}" class="btn">Novo Usuário</a>
+            </div>
+    </div>
+</body>
+    <footer>
+        <div class="footer-content">
+        <p>Feito com ❤️</p>
+        </div>
+    </footer>
+</html>

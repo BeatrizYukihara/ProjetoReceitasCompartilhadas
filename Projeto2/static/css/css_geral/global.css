@@ -1,0 +1,33 @@
+/* 
+  GLOBAL STYLES - Este arquivo define estilos globais para todos os elementos da página. 
+  Ele inclui a configuração de box-sizing, estilos de imagem, e o corpo da página. 
+  Também define o layout principal para garantir uma exibição adequada em toda a página.
+*/
+
+/* GLOBAL SETTINGS */
+* {
+    box-sizing: border-box; /* Garantir que o box-sizing seja "border-box" para todos os elementos */
+  }
+  
+img {
+    max-width: 100%; /* Impede que as imagens ultrapassem o limite de largura */
+    height: auto;
+    display: block;
+  }
+  
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+    font-family: 'Handlee', cursive, sans-serif;
+    background: #f4f1ea; /* Cor de fundo suave */
+    flex: 1;
+}
+
+  
+html{
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}

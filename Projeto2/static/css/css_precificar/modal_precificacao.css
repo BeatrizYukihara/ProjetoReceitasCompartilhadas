@@ -1,0 +1,154 @@
+/* 
+  MODAL PRECIFICAÇÃO STYLES - Define o estilo para o modal que permite 
+  com que o usuário calcule o preço de uma receita
+*/
+
+
+
+
+/* Estilo base do modal: fundo escuro semitransparente cobrindo a tela */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;     /* centraliza verticalmente */
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.5); /* fundo escuro com transparência */
+  z-index: 999; /* fica acima de outros elementos */
+  overflow-y: auto; /* permite rolagem se o conteúdo passar da tela */
+}
+
+/* Caixa principal do modal */
+.modal-container {
+  background-color: #fff6d6; /* fundo amarelo claro */
+  border-radius: 16px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Cabeçalho do modal */
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Título da receita */
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #704214; /* marrom escuro */
+}
+
+/* Botão de fechar */
+.close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.close-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #704214;
+}
+
+/* Corpo do modal */
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Cabeçalho da tabela de ingredientes */
+.ingredient-header {
+  display: grid;
+  grid-template-columns: 2.5fr 4fr 0.1fr 3fr 2fr; /* nome | preço | = | qtd | unidade */
+  font-weight: bold;
+  color: #704214;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Cada linha de ingrediente */
+.ingredient-row {
+  display: grid;
+  grid-template-columns: 2fr 3fr 0.1fr 3fr 1fr;
+  align-items: cenxter;
+  margin-bottom: 0.75rem;
+}
+
+/* Nome do ingrediente */
+.ingredient-name {
+  color: #4a3a28;
+}
+
+/* Inputs de preço e quantidade */
+.price-input,
+.quantity-input {
+  width: 80%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Containers dos inputs com alinhamento horizontal */
+.ingredient-price,
+.ingredient-quantity {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Texto da unidade (ex: g, ml, etc.) */
+.unit-text {
+  min-width: 60px;
+  color: #4a3a28;
+  font-size: 1rem;
+  padding-left: 4px;
+}
+
+/* Estilo do sinal de igual entre os inputs */
+.equal-sign {
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Rodapé do modal */
+.modal-footer {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #ccc;
+}
+
+/* Botão de confirmar */
+.confirm-btn {
+  background-color: #704214;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.confirm-btn:hover {
+  background-color: #5c3517;
+}

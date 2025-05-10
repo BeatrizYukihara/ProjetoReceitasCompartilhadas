@@ -1,0 +1,122 @@
+/* Modal de fundo */
+#modalExcluir {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escurecido */
+  z-index: 1000;
+}
+  
+/* Conteúdo do modal */
+#modalExcluir .modal-conteudo {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+  
+/* Título do modal */
+#tituloModalExcluir {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+/* Input de pesquisa */
+#pesquisaExcluir {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+  }
+  
+/* Container da lista */
+.lista-receitas {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+/* Itens da lista */
+.lista-receitas .item-receita {
+    padding: 10px 14px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: 1px solid #ddd;
+  }
+  
+/* Hover nos itens */
+  .lista-receitas .item-receita:hover {
+    background-color: #efefef;
+}
+  
+/* Item selecionado */
+  .lista-receitas .item-receita.selecionado {
+    background-color: #d3f8e2;  /* Verde suave */
+    border: 2px solid #4caf50;  /* Borda verde */
+}
+
+
+
+
+
+
+
+
+
+
+  
+
+/* Botão de exclusão (vermelho e visível) */
+#confirmarExclusao {
+    background-color: #d62335;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  #confirmarExclusao:hover {
+    background-color: #a32835;
+  }
+  
+  /* Botão Fechar (maior e mais destacado) */
+  #botaoFecharModal {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  #botaoFecharModal:hover {
+    background-color: #5a6268;
+  }
