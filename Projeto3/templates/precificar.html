@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardápio Semanal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/css_geral/reset.css">
+  <link rel="stylesheet" href="/static/css/css_geral/global.css">
+  <link rel="stylesheet" href="/static/css/css_geral/header_and_footer.css">
+  <link rel="stylesheet" href="/static/css/css_precificar/filter.css">
+  <link rel="stylesheet" href="/static/css/css_geral/container.css">
+  <link rel="stylesheet" href="/static/css/css_geral/navigation.css">
+  <link rel="stylesheet" href="/static/css/css_precificar/recipes.css">
+  <link rel="stylesheet" href="/static/css/css_precificar/modal_precificacao.css">
+  <link rel="stylesheet" href="/static/css/css_precificar/preco_final.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1 class="header-title" id="usuarioTitulo" data-nome="{{ nome_usuario }}">Olá, {{ nome_usuario }}!</h1>
+    </div>
+  </header>
+
+  <div class="logo-circle">
+    <img src="/static/imagens/Logo_site_trabalho.png" alt="Logo do Site"/>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="nav-options">
+        <a href="/minhas_receitas" class="option">Minhas Receitas</a>
+        <span class="option active">Precificar Receita</span>
+        <a href="/cardapio" class="option">Cardápio Semanal</a>
+        <a href="/meu_perfil" class="option">Meu Perfil</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="filters-actions">
+        <span class="option active">Escolha uma receita para precificar:</span>
+        <input type="text" id="searchInput" placeholder="Buscar receita...">
+        <select id="typeFilter">
+          <option value="todos">Todos os tipos</option>
+          <option value="doce">Doce</option>
+          <option value="salgado">Salgado</option>
+          <option value="outros">Outros</option>
+        </select>
+  </div>
+</div>
+
+
+<div class="section">
+  <div id="recipesList"></div>
+</div>
+</div>
+</div>
+
+<!-- Modal de precificação -->
+<div id="modalPrecificar" class="modal" style="display: none;">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div>
+        <h2 id="tituloReceitaModal" class="modal-title">Nome da Receita</h2>
+      </div>
+      <button onclick="fecharModal()" class="close-btn">
+        <svg class="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="ingredient-table">
+        <div class="ingredient-header">
+          <div>Ingrediente</div>
+          <div>Preço</div>
+          <div></div>
+          <div>Quantidade</div>
+          <div>Unidade de medida</div>
+        </div>
+        
+
+        <div id="ingredientesFormulario">
+          <!-- Os ingredientes serão inseridos dinamicamente aqui -->
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button onclick="confirmarPreco()" class="confirm-btn">Confirmar</button>
+    </div>
+  </div>
+</div>
+ 
+
+<!-- Exibe o preço final -->
+<div id="precoCaixa" class="preco-caixa" style="display: none;">
+  <img src="/static/imagens/cifrao.png" alt="Ícone de cifrão" class="icone-cifrao">
+  <span id="mensagemPreco">Preço total da receita: R$ 0.00</span>
+</div>
+
+  <footer>
+    <div class="footer-content">
+      <p>Feito com ❤️</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<script src="/static/js/js_precificar.js"></script>
+   
