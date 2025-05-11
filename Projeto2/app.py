@@ -182,20 +182,22 @@ def cardapio():
         return redirect(url_for('login'))
     return render_template('cardapio.html', nome_usuario=nome_usuario, id_usuario=id_usuario)
 
-# Rota para adicionar uma receita ao cardápio
 @app.route('/cardapio/adicionar', methods=['POST'])
 def adicionar_receita_cardapio():
     if 'usuario_id' not in session:
         return jsonify({'erro': 'Usuário não autenticado'}), 401
 
     dados = request.json
-    usuario_id = session['usuario_id']
-    dia_semana = session['dia_semana']
-    tipo = session['tipo']
-    receita_id = session['receita_id']
+    usuario_id = dados.get('usuario_id')
+    dia_semana = dados.get('dia_semana')
+    tipo = dados.get('tipo')
+    receita_id = dados.get('receita_id')
 
     cardapio_dao.adicionar_receita_cardapio(usuario_id, dia_semana, tipo, receita_id)
+
+    # Retorna mensagem de sucesso
     return jsonify({'mensagem': 'Receita adicionada ao cardápio com sucesso'}), 200
+
 
 @app.route('/cardapio/preparar', methods=['POST'])
 def preparar_dados_cardapio():
@@ -253,10 +255,9 @@ def perfil():
         'meu_perfil.html',
         nome_usuario=session.get('usuario_nome'),
         email_usuario=session.get('email_usuario'),
-        receitas_criadas=usuario_dao.contar_receitas_do_usuario(session['usuario_id'])  # Removido prato_favorito
+        receitas_criadas=usuario_dao.contar_receitas_do_usuario(session['usuario_id']),
+        prato_favorito=session.get('prato_favorito')  # adicionado
     )
-
-
 
 
 @app.route('/atualizar_usuario', methods=['POST'])
@@ -268,14 +269,18 @@ def atualizar_usuario():
     usuario_id = session['usuario_id']
     nome = data.get('nome')
     email = data.get('email')
+    prato = data.get('prato')
 
     dao = UsuarioDAO()
-    dao.atualizar(usuario_id, nome, email)  # Atualizando sem prato
+    dao.atualizar(usuario_id, nome, email, prato)
 
     session['usuario_nome'] = nome
-    session['email_usuario'] = email  # Adiciona o e-mail na sessão
+    session['email_usuario'] = email
+    session['prato_favorito'] = prato
 
     return jsonify({'status': 'sucesso'})
+
+
 
 
 
