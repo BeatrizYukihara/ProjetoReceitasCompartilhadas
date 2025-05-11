@@ -1,0 +1,24 @@
+/* 
+  CONTAINER STYLES - Define o estilo para os containers que envolvem o conteúdo principal da página.
+  A ideia aqui é proporcionar um layout centralizado, com espaçamentos adequados e uma aparência limpa.
+*/
+
+/*Um container é uma caixa (geralmente uma <div>) usada para agrupar e organizar elementos da página, 
+  controlando layout, espaçamento e alinhamento com CSS.
+*/
+
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff8e1; /* Cor de fundo suave do container */
+    border-radius: 12px; /* Cantos arredondados */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    flex-grow: 1; /* Garante que o container ocupe o restante do espaço disponível */
+  }
+  
+.section {
+    margin-bottom: 20px;
+}
+  

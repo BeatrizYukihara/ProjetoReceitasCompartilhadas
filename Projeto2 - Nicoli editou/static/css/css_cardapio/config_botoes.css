@@ -1,0 +1,32 @@
+/* 
+  BUTTONS STYLE - Estilos para botões interativos no cardápio semanal
+*/
+
+/* Contêiner com os dois botões lado a lado */
+.botoes-lado-a-lado {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.botao-excluir {
+  background-color: transparent; /* Remove o fundo padrão do botão */
+  border: none; /* Remove a borda padrão */
+  color: #e74c3c; /* Define a cor vermelha para o ícone ❌ */
+  font-size: 0.8rem; /* Aumenta o tamanho da fonte (ícone) */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  transition: transform 0.2s ease, color 0.2s ease; /* Animação suave para zoom e mudança de cor no hover */
+  padding: 4px; /* Pequeno espaço interno para não ficar colado a outros elementos */
+}
+
+.botao-excluir:hover {
+  color: #c0392b; /* Muda para um vermelho mais escuro quando o mouse passa por cima */
+  transform: scale(1.2); /* Aumenta levemente o tamanho para dar destaque */
+}
+
+.botao-excluir:focus {
+  outline: none; /* Remove o contorno azul padrão do navegador ao focar */
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3); /* Adiciona um leve brilho avermelhado ao redor */
+  border-radius: 4px; /* Suaviza os cantos do contorno de foco */
+}
