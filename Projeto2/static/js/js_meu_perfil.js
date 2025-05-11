@@ -44,15 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'sucesso') {
-          // Atualiza o perfil na página
-          document.querySelector('.perfil-info p strong:nth-of-type(1)').nextSibling.textContent = ` ${usuarioData.nome}`;
-          document.querySelector('.perfil-info p strong:nth-of-type(2)').nextSibling.textContent = ` ${usuarioData.email}`;
-          document.querySelector('.perfil-info p strong:nth-of-type(3)').nextSibling.textContent = ` ${usuarioData.telefone}`;
-          document.querySelector('.perfil-info p strong:nth-of-type(4)').nextSibling.textContent = ` ${usuarioData.prato}`;
+          modalEditarPerfil.classList.add('hidden'); // Fecha o modal
+          modalSucessoPerfil.classList.remove('hidden'); // Mostra a mensagem de sucesso
 
-          modalSucessoPerfil.style.display = 'block';
-          setTimeout(() => modalSucessoPerfil.style.display = 'none', 2000);
-          modalEditarPerfil.classList.add('hidden');
+          // Aguarda 1,5 segundo e recarrega a página
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         }
       })
       .catch(error => console.error('Erro ao atualizar perfil:', error));
