@@ -60,34 +60,23 @@ async adicionarReceita() {
     const dia = this.novoDia;
     const refeicao = this.novaRefeicao;
 
+    // Verifica se já existe no cardápio local
     if (!this.cardapio[dia][refeicao].includes(receitaId)) {
-      // Envia dados para a sessão
-      let preparacao = await fetch('/cardapio/preparar', {
+      const res = await fetch('/cardapio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ receita_id: receitaId, dia, refeicao, usuario_id })
       });
 
-      // Verifica se resposta é JSON
-      if (!preparacao.ok) {
-        alert("Erro ao preparar os dados. Verifique se está logado.");
-        return;
-      }
-
-      // Agora tenta adicionar
-      const res = await fetch('/cardapio/adicionar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      // Verifica se resposta é JSON e válida
-      if (res.headers.get("content-type")?.includes("application/json")) {
+      if (res.ok) {
         const dados = await res.json();
-        if (dados.mensagem && !this.cardapio[dia][refeicao].includes(receitaId)) {
+        if (dados.sucesso) {
           this.cardapio[dia][refeicao].push(receitaId);
+        } else {
+          alert("Erro ao adicionar receita.");
         }
       } else {
-        alert("A resposta do servidor não foi JSON. Provavelmente sessão expirada.");
+        alert("Erro na comunicação com o servidor.");
       }
     }
   }
@@ -154,19 +143,18 @@ gerarListaCompras() {
     },
 
 //========================== INICIALIZAÇÃO ====================================
-    async carregarReceitas() {
-      const res = await fetch('/api/receitas');
-      this.receitasUsuario = await res.json();
-    },
-
     async carregarCardapio() {
       const res = await fetch(`/cardapio?usuario_id=${usuario_id}`);
-      this.cardapio = await res.json();
-    },
+      if (res.ok) {
+        this.cardapio = await res.json();
+      } else {
+        alert("Erro ao carregar o cardápio.");
+      }
+    }
+    ,
     
 
-    async init() {
-      await this.carregarReceitas();
+async init() {
       await this.carregarCardapio();
     }
   };
