@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => console.error('Erro ao excluir conta:', error));
   });
 
-  const deslogarBtn = document.getElementById('deslogarBtn');
-deslogarBtn.addEventListener('click', () => {
+  const sairBtn = document.getElementById('sairBtn');
+sairrBtn.addEventListener('click', () => {
   window.location.href = '/logout';
 });
 
