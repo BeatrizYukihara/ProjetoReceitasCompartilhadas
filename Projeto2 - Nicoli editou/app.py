@@ -2,6 +2,7 @@ from flask import (
     Flask, render_template, request,flash,
     redirect, url_for, session, jsonify
 )
+import sqlite3
 import bcrypt
 from models.receita import Receita, Preparos, Ingrediente
 from models.usuario import Usuario
@@ -182,65 +183,91 @@ def cardapio():
         return redirect(url_for('login'))
     return render_template('cardapio.html', nome_usuario=nome_usuario, id_usuario=id_usuario)
 
-# Rota para adicionar uma receita ao cardápio
-@app.route('/cardapio/adicionar', methods=['POST'])
-def adicionar_receita_cardapio():
-    if 'usuario_id' not in session:
-        return jsonify({'erro': 'Usuário não autenticado'}), 401
 
-    dados = request.json
-    usuario_id = session['usuario_id']
-    dia_semana = session['dia_semana']
-    tipo = session['tipo']
-    receita_id = session['receita_id']
+def get_db():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 
-    cardapio_dao.adicionar_receita_cardapio(usuario_id, dia_semana, tipo, receita_id)
-    return jsonify({'mensagem': 'Receita adicionada ao cardápio com sucesso'}), 200
+@app.route('/api/receitas')
+def api_receitas():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT r.id, r.nome AS titulo FROM Receita r')
+    receitas = [{'id': row['id'], 'titulo': row['titulo'], 'ingredientes': []} for row in cursor.fetchall()]
+    
+    for receita in receitas:
+        cursor.execute('SELECT nome AS produto, quantidade, unidade FROM Ingredientes WHERE id_receita_FK = ?', (receita['id'],))
+        receita['ingredientes'] = [dict(row) for row in cursor.fetchall()]
+
+    return jsonify(receitas)
 
 @app.route('/cardapio/preparar', methods=['POST'])
-def preparar_dados_cardapio():
-    if 'usuario_id' not in session:
-        return jsonify({'sucesso': False, 'erro': 'Usuário não autenticado'}), 401
-    dados = request.json
-    receita_id = dados.get('receita_id')
-    dia = dados.get('dia')
-    tipo = dados.get('refeicao')
-    if not all([receita_id, dia, tipo]):
-        return jsonify({'sucesso': False, 'erro': 'Dados incompletos'}), 400
-    session['receita_id'] = receita_id
-    session['dia_semana'] = dia
-    session['tipo'] = tipo
-    return jsonify({'sucesso': True, 'mensagem': 'Dados armazenados na sessão com sucesso'})
+def preparar_cardapio():
+    dados = request.get_json()
+    session['cardapio_buffer'] = dados
+    return jsonify({"mensagem": "Preparado com sucesso"})
 
+@app.route('/cardapio/adicionar', methods=['POST'])
+def adicionar_cardapio():
+    dados = session.get('cardapio_buffer')
+    if not dados:
+        return jsonify({"erro": "Nada preparado"}), 400
 
-# Rota para excluir uma receita do cardápio
-@app.route('/api/cardapio/excluir', methods=['POST'])
-def excluir_receita_cardapio():
-    if 'usuario_id' not in session:
-        return jsonify({'erro': 'Usuário não autenticado'}), 401
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    # Cria ou recupera refeição
+    cursor.execute("""
+        INSERT INTO Refeicoes_Cardapio (dia_semana, tipo, id_receita_FK)
+        VALUES (?, ?, ?)
+    """, (dados['dia'], dados['refeicao'], dados['receita_id']))
+    refeicao_id = cursor.lastrowid
 
-    dados = request.json
-    usuario_id = session['usuario_id']
-    dia_semana = dados.get('dia_semana')
-    tipo = dados.get('tipo')
-    receita_id = dados.get('receita_id')
+    # Insere no cardápio
+    cursor.execute("""
+        INSERT INTO Cardapio (refeicoes_Cardapio_FK, id_usuario_FK)
+        VALUES (?, ?)
+    """, (refeicao_id, dados['usuario_id']))
+    conn.commit()
 
-    if not all([dia_semana, tipo, receita_id]):
-        return jsonify({'erro': 'Dados incompletos'}), 400
+    return jsonify({"mensagem": "Receita adicionada com sucesso"})
 
-    cardapio_dao.excluir_receita_cardapio(usuario_id, dia_semana, tipo, receita_id)
-    return jsonify({'mensagem': 'Receita removida do cardápio com sucesso'}), 200
+@app.route('/cardapio/remover', methods=['DELETE'])
+def remover_cardapio():
+    dados = request.get_json()
+    conn = get_db()
+    cursor = conn.cursor()
 
+    cursor.execute("""
+        DELETE FROM Cardapio
+        WHERE id_usuario_FK = ? AND refeicoes_Cardapio_FK IN (
+            SELECT rc.id FROM Refeicoes_Cardapio rc
+            WHERE rc.dia_semana = ? AND rc.tipo = ? AND rc.id_receita_FK = ?
+        )
+    """, (dados['usuario_id'], dados['dia'], dados['refeicao'], dados['receita_id']))
+    conn.commit()
+    return jsonify({"sucesso": True})
 
-# Rota para visualizar o cardápio do usuário logado
-@app.route('/api/cardapio', methods=['GET'])
-def visualizar_cardapio():
-    if 'usuario_id' not in session:
-        return jsonify({'erro': 'Usuário não autenticado'}), 401
+@app.route('/cardapio')
+def obter_cardapio():
+    usuario_id = request.args.get('usuario_id')
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT rc.dia_semana, rc.tipo, rc.id_receita_FK
+        FROM Cardapio c
+        JOIN Refeicoes_Cardapio rc ON c.refeicoes_Cardapio_FK = rc.id
+        WHERE c.id_usuario_FK = ?
+    """, (usuario_id,))
+    
+    resultado = {dia: {'Café da Manhã': [], 'Almoço': [], 'Jantar': []} for dia in
+                 ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']}
 
-    usuario_id = session['usuario_id']
-    cardapio = cardapio_dao.visualizar_receitas_cardapio(usuario_id)
-    return jsonify(cardapio), 200
+    for row in cursor.fetchall():
+        resultado[row['dia_semana']][row['tipo']].append(str(row['id_receita_FK']))
+
+    return jsonify(resultado)
 
 #=======================================ROTAS MEU PERFIL===========================================
 
@@ -253,10 +280,9 @@ def perfil():
         'meu_perfil.html',
         nome_usuario=session.get('usuario_nome'),
         email_usuario=session.get('email_usuario'),
-        receitas_criadas=usuario_dao.contar_receitas_do_usuario(session['usuario_id'])  # Removido prato_favorito
+        receitas_criadas=usuario_dao.contar_receitas_do_usuario(session['usuario_id']),
+        prato_favorito=session.get('prato_favorito')  # adicionado
     )
-
-
 
 
 @app.route('/atualizar_usuario', methods=['POST'])
@@ -268,14 +294,18 @@ def atualizar_usuario():
     usuario_id = session['usuario_id']
     nome = data.get('nome')
     email = data.get('email')
+    prato = data.get('prato')
 
     dao = UsuarioDAO()
-    dao.atualizar(usuario_id, nome, email)  # Atualizando sem prato
+    dao.atualizar(usuario_id, nome, email, prato)
 
     session['usuario_nome'] = nome
-    session['email_usuario'] = email  # Adiciona o e-mail na sessão
+    session['email_usuario'] = email
+    session['prato_favorito'] = prato
 
     return jsonify({'status': 'sucesso'})
+
+
 
 
 
@@ -286,6 +316,10 @@ def excluir_conta():
 
     usuario_dao.excluir(usuario_id)
     return jsonify({'status': 'conta excluída'})
+
+
+
+
 
 #===================================API´S (BUSCAR INFOS NO BD)==========================================
 @app.route('/api/receitas', methods=['GET'])

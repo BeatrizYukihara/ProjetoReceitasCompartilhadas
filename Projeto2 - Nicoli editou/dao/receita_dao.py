@@ -90,7 +90,3 @@ class ReceitaDAO:
         """, (preco, id_receita))
         conn.commit()
         conn.close()
-
-
-
-

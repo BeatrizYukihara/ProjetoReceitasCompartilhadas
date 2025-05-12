@@ -93,32 +93,25 @@ class UsuarioDAO:
         conn.commit()
         conn.close()
 
-    def atualizar(self, usuario_id, nome, email):
+    def atualizar(self, usuario_id, nome, email, prato):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         cursor.execute('''
             UPDATE Usuario
-            SET nome = ?, email = ?
+            SET nome = ?, email = ?, prato_favorito = ?
             WHERE id = ?
-        ''', (nome, email, usuario_id))
+        ''', (nome, email, prato, usuario_id))
         conn.commit()
         conn.close()
-
 
     def contar_receitas_do_usuario(self, usuario_id):
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
-            cursor.execute("SELECT COUNT(*) FROM Receita WHERE usuario_id = ?", (usuario_id,))
+            cursor.execute("SELECT COUNT(*) FROM usuario_receita WHERE usuario_id = ?", (usuario_id,))
             resultado = cursor.fetchone()
             conn.close()
             return resultado[0] if resultado else 0
         except Exception as e:
             print(f"Erro ao contar receitas do usuário: {e}")
             return 0
-
-
-
-
-
-

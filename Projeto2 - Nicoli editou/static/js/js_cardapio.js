@@ -99,17 +99,18 @@ async adicionarReceita() {
 
 
 async removerReceita(dia, refeicao, index) {
-      const receitaId = this.cardapio[dia][refeicao][index];
-      const res = await fetch('/cardapio/remover', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ receita_id: receitaId, dia, refeicao })
-      });
-      const dados = await res.json();
-      if (dados.sucesso) {
-        this.cardapio[dia][refeicao].splice(index, 1);
-      }
-    },
+  const receitaId = this.cardapio[dia][refeicao][index];
+  const res = await fetch('/cardapio/remover', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ receita_id: receitaId, dia, refeicao, usuario_id })
+  });
+  const dados = await res.json();
+  if (dados.sucesso) {
+    this.cardapio[dia][refeicao].splice(index, 1);
+  }
+},
+
 
 //=========================== AUTOCOMPLETE ======================================
 filtrarReceitas(index) {
@@ -159,9 +160,10 @@ gerarListaCompras() {
     },
 
     async carregarCardapio() {
-      const res = await fetch('/cardapio');
+      const res = await fetch(`/cardapio?usuario_id=${usuario_id}`);
       this.cardapio = await res.json();
     },
+    
 
     async init() {
       await this.carregarReceitas();
