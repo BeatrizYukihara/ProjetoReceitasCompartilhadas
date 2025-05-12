@@ -1,0 +1,37 @@
+/* 
+  PREÇO FINAL STYLES - Define o estilo para o pequeno prompt que aparece após
+  usuário calcular o valor final de uma receita
+*/
+
+.preco-caixa {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff7dc;
+    color: #333;
+    border: 2px solid #f4c542;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 999;
+    font-weight: bold;
+    font-size: 1rem;
+    animation: fadeInOut 4s forwards;
+  }
+  
+.preco-caixa .icone-cifrao {
+    width: 24px;
+    height: 24px;
+  }
+  
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+  }
+  
+  

@@ -1,0 +1,178 @@
+/* 
+  MODAL CRIAR RECEITAS – CSS
+  Este arquivo define os estilos visuais do modal de criação de receitas.
+  Ele cuida da aparência geral do modal, incluindo layout, inputs, botões,
+  campos de ingredientes e passos, e comportamento de rolagem quando o conteúdo cresce.
+*/
+
+/* === CONTAINER DO MODAL === */
+/* Define a área de fundo escura que cobre toda a tela quando o modal é exibido */
+.modal {
+  display: flex;                   /* Esconde o modal inicialmente */
+  position: fixed;
+  z-index: 1000;                   /* Garante que fique acima de outros elementos */
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);  /* Fundo escuro com transparência */
+  justify-content: center;        /* Centraliza horizontalmente */
+  align-items: center;            /* Centraliza verticalmente */
+}
+
+/* === CONTEÚDO INTERNO DO MODAL === */
+/* Estiliza a caixa branca interna que contém o formulário */
+.modal-conteudo {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 99vh;               /* Limita a altura máxima do modal */
+  overflow-y: auto;               /* Adiciona barra de rolagem vertical, se necessário */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);  /* Sombra leve ao redor da caixa */
+}
+
+/* === TÍTULOS E TEXTOS === */
+/* Remove margem superior dos títulos */
+.modal-conteudo h2 {
+  margin-bottom: 20px;
+  margin-top: 10;
+  font-size: 30px;       /* Tamanho da fonte */
+  color: #333;           /* Cor do texto */
+  font-family: 'Handlee', cursive;  /* Fonte personalizada */
+  text-align: center;    /* Alinhamento centralizado */
+}
+
+/* Aplica espaçamento e estilo a todos os labels do formulário */
+.modal-conteudo label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  font-weight: bold;
+}
+
+/* === CAMPOS DE FORMULÁRIO === */
+/* Estilo unificado para inputs, selects e textareas */
+.modal-conteudo input,
+.modal-conteudo select,
+.modal-conteudo textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-ingrediente {
+  height: 35px ;
+  padding: 4px 6px;
+  font-size: 13px;
+}
+
+
+.input-container {
+  display: flex; /* Flexbox para os inputs */
+  gap: 10px; /* Espaço entre os inputs */
+  flex-grow: 1; /* Faz os inputs ocuparem o espaço restante */
+  margin-bottom: 10px;
+
+
+}
+
+
+/* === BOTÕES === */
+/* Estilo base para todos os botões dentro do modal */
+.modal-conteudo button {
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Botões de adicionar igredientes e passos */
+.botao-acao {
+  background-color: #68aefa;   
+  color: white;                /* Texto branco */
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 30px !important;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.botao-acao:hover {
+  background-color: #0056b3;   /* Azul mais escuro ao passar o mouse */
+}
+
+/* Botão de fechar ("Fechar") com cor neutra */
+#fecharModalBtn {
+  background-color: #ccc;
+  margin-left: 10px;
+}
+
+/* Botão de salvar ("submit") com destaque em verde */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Botão para excluir igredientes e passos */
+.botao-acao .x-vermelho {
+  color: #dc3545;                  /* Cor vermelha para o X */
+  font-weight: bold;                /* Deixar o "X" mais destacado */
+  font-size: 18px;                  /* Aumenta o tamanho do X */
+}
+
+.botao-lixeira {
+  background-color: #fff;          /* Fundo branco */
+}
+
+.botao-lixeira:hover {
+  background-color: #f8d7da;       /* Cor de fundo mais clara quando passar o mouse */
+}
+
+/* === CLASSE AUXILIAR === */
+/* Classe usada para esconder elementos via JavaScript */
+.hidden {
+  display: none !important;
+}
+
+/* === CAMPOS DINÂMICOS DE INGREDIENTES E PASSOS === */
+/* Estilo para grupos de campos (ingrediente e passo) */
+.ingrediente-item,
+.passo-item {
+  display: flex;
+  gap: 8px;
+  margin-bottom: -8px;
+  align-items: center;
+}
+
+.ingrediente-item {
+  margin-bottom: -25px;
+}
+
+/* Campos dentro de ingredientes e textarea do passo ocupam o máximo possível */
+.ingrediente-item input,
+.ingrediente-item select,
+.passo-item textarea {
+  flex: 1;
+}
+
+/* Número dos passos no modo de preparo */
+.passo-item span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
