@@ -1,0 +1,38 @@
+/* 
+  NAVIGATION STYLES - Define os estilos para o menu de navegação, incluindo os itens de navegação 
+  e a aparência do item ativo e dos itens ao passar o mouse.
+*/
+
+/* 
+  Minhas receitas, precificar receita, amigos e cardápio semanal
+*/
+
+/* Container das opções de navegação: exibe os links lado a lado com espaçamento */
+.nav-options {
+  display: flex;          /* Exibe os itens em linha (horizontalmente) */
+  gap: 20px;              /* Espaçamento entre os itens */
+  margin-bottom: 20px;    /* Espaço abaixo do menu */
+}
+
+/* Estilo padrão para cada opção de navegação */
+.nav-options .option {
+  font-size: 20px;        /* Tamanho da fonte dos itens */
+  font-weight: bold;      /* Deixa o texto em negrito */
+  text-decoration: none;  /* Remove sublinhado de links */
+  color: #a86b00;         /* Cor do texto */
+  padding: 5px 10px;      /* Espaçamento interno (topo/baixo, esquerda/direita) */
+  border-radius: 5px;     /* Bordas arredondadas */
+}
+
+/* Estilo ao passar o mouse sobre um item (hover) */
+.nav-options .option:hover {
+  background-color: #f3d9a5; /* Fundo mais claro ao passar o mouse */
+}
+
+/* Estilo do item ativo (página atual) */
+.nav-options .active {
+  color: #704214;              /* Cor de destaque para o texto */
+  pointer-events: none;        /* Impede que o item seja clicável */
+  background-color: #f9e0a3;   /* Cor de fundo diferenciada */
+  cursor: default;             /* Cursor padrão, indicando que o item está "ativo" */
+}

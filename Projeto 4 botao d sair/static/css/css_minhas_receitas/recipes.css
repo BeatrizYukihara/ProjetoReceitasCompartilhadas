@@ -1,0 +1,58 @@
+/* 
+  RECIPES STYLES - Este arquivo contém os estilos relacionados às receitas, incluindo o estilo dos 
+  cards de receitas e o layout de lista de receitas. Ele também trata dos efeitos ao passar o mouse 
+  sobre os cards e do layout responsivo.
+*/
+
+#recipesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  max-height: 580px;
+  overflow-y: auto;
+}
+
+/* Estilo base para o card de receita */
+.recipe-card {
+  background: #fff6d6;
+  border: 1px solid #f2c24f;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: auto; /* Altura agora automática, depende do conteúdo */
+  min-height: 150px; /* Altura mínima opcional */
+}
+
+/* Efeito ao passar o cursor sobre o card */
+.recipe-card:hover {
+  transform: scale(1.00);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo do título da receita */
+.recipe-title {
+  font-size: 24px;
+  color: #704214;
+  margin-bottom: 10px;
+}
+
+/* Estilo para a seção que mostra o tipo da receita */
+.recipe-type {
+  font-size: 14px;
+  color: #888;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para o ícone do tipo da receita */
+.recipe-type img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
