@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const sairBtn = document.getElementById('sairBtn');
-sairrBtn.addEventListener('click', () => {
+sairBtn.addEventListener('click', () => {
   window.location.href = '/logout';
 });
 
