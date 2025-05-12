@@ -77,8 +77,10 @@ def login():
                 # Se as credenciais estiverem corretas, armazena o usuário na sessão
                 session['usuario_id'] = usuario.id
                 session['usuario_nome'] = usuario.nome
+                session['email_usuario'] = usuario.email
+
                 flash('Login bem-sucedido!')
-                return redirect(url_for('minhas_receitas', id_usuario=usuario.id, nome_usuario=usuario.nome))
+                return redirect(url_for('minhas_receitas', id_usuario=usuario.id, nome_usuario=usuario.nome,email_email=usuario.email))
         # Caso não encontre o usuário ou a senha não corresponda
         flash('Login inválido. Verifique suas credenciais.')
         return redirect(url_for('login'))
@@ -200,7 +202,7 @@ def remover_cardapio():
     return jsonify({"sucesso": sucesso})
 
 #=======================================ROTAS MEU PERFIL===========================================
-
+'''
 @app.route('/meu_perfil')
 def perfil():
     if 'usuario_id' not in session:
@@ -211,10 +213,24 @@ def perfil():
         nome_usuario=session.get('usuario_nome'),
         email_usuario=session.get('email_usuario'),
         receitas_criadas=usuario_dao.contar_receitas_do_usuario(session['usuario_id']),
-        prato_favorito=session.get('prato_favorito')  # adicionado
     )
 
+'''
+@app.route('/meu_perfil')
+def perfil():
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
 
+    # Obtendo o id do usuário da sessão
+    usuario_id = session.get('usuario_id')
+
+    return render_template(
+        'meu_perfil.html',
+        nome_usuario=session.get('usuario_nome'),
+        email_usuario=session.get('email_usuario'),
+        receitas_criadas=usuario_dao.contar_receitas_do_usuario(usuario_id),
+        id_usuario=usuario_id  # Passando o id do usuário para o template
+    )
 @app.route('/atualizar_usuario', methods=['POST'])
 def atualizar_usuario():
     if 'usuario_id' not in session:
@@ -224,18 +240,15 @@ def atualizar_usuario():
     usuario_id = session['usuario_id']
     nome = data.get('nome')
     email = data.get('email')
-    prato = data.get('prato')
+
 
     dao = UsuarioDAO()
-    dao.atualizar(usuario_id, nome, email, prato)
+    dao.atualizar(usuario_id, nome, email)
 
     session['usuario_nome'] = nome
     session['email_usuario'] = email
-    session['prato_favorito'] = prato
 
     return jsonify({'status': 'sucesso'})
-
-
 
 
 
@@ -243,8 +256,11 @@ def atualizar_usuario():
 def excluir_conta():
     data = request.json
     usuario_id = data.get('usuario_id')
+    print(f"Excluindo conta com ID: {usuario_id}")  # Verifique se o ID é impresso corretamente
 
+    # Verifique se o usuario_dao.excluir(usuario_id) está funcionando corretamente
     usuario_dao.excluir(usuario_id)
+    
     return jsonify({'status': 'conta excluída'})
 
 

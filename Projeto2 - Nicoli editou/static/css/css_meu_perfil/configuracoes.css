@@ -95,3 +95,29 @@
   align-items: center;
   gap: 30px;
 }
+
+/* === CONTAINER DO BOTÃO DE LOGOUT DENTRO DO CONTAINER PRINCIPAL === */
+.logout-form-container {
+  width: 100%;
+  max-width: 800px; /* mesmo tamanho da caixa .perfil-info */
+  justify-content: flex-end; /* alinha o botão à direita */
+  padding-right: 40px;
+  margin-top: -40px;
+}
+
+/* === ESTILO DO BOTÃO DE LOGOUT === */
+.botao-logout {
+  background-color: #555;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.botao-logout:hover {
+  background-color: #333;
+}

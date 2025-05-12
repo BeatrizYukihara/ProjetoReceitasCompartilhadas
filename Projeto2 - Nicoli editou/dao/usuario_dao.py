@@ -24,10 +24,7 @@ class UsuarioDAO:
                         nome=usuario_bd.nome,
                         email=usuario_bd.email,
                         senha=usuario_bd.senha,  # Aqui ainda armazenamos o hash
-                        tipo_usuario=usuario_bd.tipo_usuario,
-                        telefone=usuario_bd.telefone,
-                        especialidade=usuario_bd.especialidade,
-                        crm=usuario_bd.crm
+
                     )
             return None  # Se o usuário não for encontrado ou a senha não corresponder
 
@@ -93,14 +90,14 @@ class UsuarioDAO:
         conn.commit()
         conn.close()
 
-    def atualizar(self, usuario_id, nome, email, prato):
+    def atualizar(self, usuario_id, nome, email):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         cursor.execute('''
             UPDATE Usuario
-            SET nome = ?, email = ?, prato_favorito = ?
+            SET nome = ?, email = ?
             WHERE id = ?
-        ''', (nome, email, prato, usuario_id))
+        ''', (nome, email, usuario_id))
         conn.commit()
         conn.close()
 

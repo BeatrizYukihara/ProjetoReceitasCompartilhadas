@@ -9,29 +9,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const confirmarExclusaoBtn = document.getElementById('confirmarExclusaoBtn');
   const cancelarExclusaoBtn = document.getElementById('cancelarExclusaoBtn');
 
+  // Pegando o ID do usuário do atributo 'data-id'
 
-//=======================================EDIÇÃO DE PERFIL============================
-  // Exibir modal para edição de perfil
+
+  if (!usuarioId) {
+    console.error("ID do usuário não encontrado.");
+    return;  // Se o ID não for encontrado, interrompe a execução
+  }
+
+  console.log("ID do usuário:", usuarioId);  // Verifique se o ID está correto no console
+
+  //========================= EDIÇÃO DE PERFIL =========================
   editarPerfilBtn.addEventListener('click', () => {
     modalEditarPerfil.classList.remove('hidden');
   });
 
-  // Fechar o modal de edição
   fecharModalBtn.addEventListener('click', () => {
     modalEditarPerfil.classList.add('hidden');
-  }); 
+  });
 
-  // Enviar as alterações para o servidor
   formEditarPerfil.addEventListener('submit', (event) => {
     event.preventDefault();
-    
+
     const dados = new FormData(formEditarPerfil);
     const usuarioData = {
       nome: dados.get('nomeUsuario'),
       email: dados.get('emailUsuario'),
-      telefone: dados.get('telefoneUsuario'),
-      prato: dados.get('pratoFavorito'),
-      foto: dados.get('fotoPerfil')
     };
 
     fetch('/atualizar_usuario', {
@@ -44,24 +47,25 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'sucesso') {
-          // Atualiza o perfil na página
-          document.querySelector('.perfil-info p strong:nth-of-type(1)').nextSibling.textContent = ` ${usuarioData.nome}`;
-          document.querySelector('.perfil-info p strong:nth-of-type(2)').nextSibling.textContent = ` ${usuarioData.email}`;
-          document.querySelector('.perfil-info p strong:nth-of-type(3)').nextSibling.textContent = ` ${usuarioData.telefone}`;
-          document.querySelector('.perfil-info p strong:nth-of-type(4)').nextSibling.textContent = ` ${usuarioData.prato}`;
-
-          modalSucessoPerfil.style.display = 'block';
-          setTimeout(() => modalSucessoPerfil.style.display = 'none', 2000);
+          // Fecha o modal de edição
           modalEditarPerfil.classList.add('hidden');
+
+          // Exibe o modal de sucesso
+          modalSucessoPerfil.classList.remove('hidden');
+          modalSucessoPerfil.style.display = 'block';
+
+          setTimeout(() => {
+            modalSucessoPerfil.style.display = 'none';
+            modalSucessoPerfil.classList.add('hidden');
+            // Recarrega a página
+            window.location.reload();
+          }, 1000);
         }
       })
       .catch(error => console.error('Erro ao atualizar perfil:', error));
   });
 
-
-  //=======================================EXCLUIR PERFIL============================
-
-  // Excluir perfil
+  //========================= EXCLUIR PERFIL =========================
   excluirPerfilBtn.addEventListener('click', () => {
     modalConfirmarExclusao.classList.remove('hidden');
   });
@@ -71,9 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   confirmarExclusaoBtn.addEventListener('click', () => {
+    // Verifique se o ID está sendo passado corretamente
+    console.log("Excluindo conta do ID:", usuarioId);
+
     fetch('/excluir_conta', {
       method: 'POST',
-      body: JSON.stringify({ usuario_id: 1 }),  // Substitua o ID pelo valor real
+      body: JSON.stringify({ id_usuario }),  // Envia o ID corretamente
       headers: {
         'Content-Type': 'application/json',
       }
@@ -81,9 +88,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'conta excluída') {
-          window.location.href = '/login';  // Redireciona para login
+          window.location.href = '/login';  // Redireciona para o login após a exclusão
         }
       })
       .catch(error => console.error('Erro ao excluir conta:', error));
   });
 });
+
+
+
