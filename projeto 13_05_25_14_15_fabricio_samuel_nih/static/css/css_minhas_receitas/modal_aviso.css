@@ -1,0 +1,41 @@
+/* Estilo para o modal de aviso */
+.modal-aviso {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: none; /* Inicia escondido */
+    z-index: 1000; /* Garante que o modal fique acima de outros elementos */
+    width: auto;
+    max-width: 300px;
+  }
+  
+  .modal-aviso-conteudo {
+    text-align: center;
+  }
+  
+  .modal-aviso-botoes button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .botao-aceitar {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .botao-rejeitar {
+    background-color: #F44336;
+    color: white;
+  }
+  
+  .botao-aceitar:hover, .botao-rejeitar:hover {
+    opacity: 0.8;
+  }
+  

@@ -1,0 +1,97 @@
+/*
+  CONFIGURAÇÕES STYLE - Define os estilos visuais da seção de perfil do usuário.
+  Ele inclui a área da foto, os botões de ações (editar/excluir), e informações adicionais do perfil.
+*/
+
+/* === CONTAINER DE OPÇÕES DO PERFIL === */
+/* Container principal que envolve a foto e os botões */
+.perfil-opcoes {
+  display: flex;
+  flex-wrap: wrap;                /* Permite quebra em telas menores */
+  align-items: flex-start;        /* Alinha itens no topo */
+  justify-content: center;        /* Centraliza horizontalmente */
+  gap: 30px;                      /* Espaçamento entre os elementos */
+  padding: 60px;
+  margin-top: 40px;
+}
+
+/* === FOTO DO USUÁRIO === */
+/* Estiliza a imagem de perfil com borda e forma circular */
+.foto-usuario {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;             /* Torna a imagem circular */
+  object-fit: cover;              /* Garante que a imagem preencha o espaço sem distorcer */
+  border: 3px solid #4CAF50;      /* Borda verde ao redor da imagem */
+}
+
+/* === BOTÕES DO PERFIL === */
+/* Agrupamento dos botões ao lado da foto */
+.botoes-perfil {
+  display: flex;
+  flex-direction: column;         /* Organiza os botões em coluna */
+  justify-content: center;
+  gap: 12px;                      /* Espaço entre os botões */
+  margin-left: 60px;              /* Distância da imagem */
+}
+
+/* Estilo base para os botões de editar e excluir */
+.botao-editar,
+.botao-excluir {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease;  /* Animação suave ao interagir */
+  width: 160px;
+}
+
+/* Botão de editar com cor verde */
+.botao-editar {
+  background-color: #4CAF50;
+}
+
+/* Botão de excluir com cor vermelha */
+.botao-excluir {
+  background-color: #f44336;
+}
+
+/* Efeito de escala ao passar o mouse */
+.botao-editar:hover, 
+.botao-excluir:hover {
+  transform: scale(1.05);
+}
+
+/* === INFORMAÇÕES DO PERFIL === */
+/* Caixa com detalhes adicionais do perfil */
+.perfil-info {
+  margin-top: 30px;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 800px;
+  font-family: 'Handlee', cursive;
+  line-height: 1.6;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Título dentro da seção de informações */
+.perfil-info h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #4CAF50;
+}
+
+/* === CONTAINER PARA FOTO E BOTÕES === */
+/* Agrupa a imagem e os botões lado a lado */
+.foto-e-botoes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}

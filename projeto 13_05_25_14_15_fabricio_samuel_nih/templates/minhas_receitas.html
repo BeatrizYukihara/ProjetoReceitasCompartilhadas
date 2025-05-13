@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minhas Receitas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/css_geral/reset.css">
+  <link rel="stylesheet" href="/static/css/css_geral/global.css">
+  <link rel="stylesheet" href="/static/css/css_geral/header_and_footer.css">
+  <link rel="stylesheet" href="/static/css/css_geral/container.css">
+  <link rel="stylesheet" href="/static/css/css_geral/navigation.css">
+  <link rel="stylesheet" href="/static/css/css_geral/botoes.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/filter.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/recipes.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/modal_receitas.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/modal_exclusao.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/modal_confirmacao.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/modal_criar_receitas.css">
+  <link rel="stylesheet" href="/static/css/css_minhas_receitas/modal_aviso.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="header-title" id="usuarioTitulo" data-nome="{{ nome_usuario|e }}"></h1>
+    </div>
+  </header>  
+
+  <div class="logo-circle">
+    <img src="/static/imagens/Logo_site_trabalho.png" alt="Logo do Site"/>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="nav-options">
+        <span class="option active">Minhas Receitas</span>
+        <a href="/precificar" class="option">Precificar Receita</a>
+        <a href="/cardapio" class="option">Cardápio Semanal</a>
+        <a href="/meu_perfil" class="option">Meu Perfil</a>
+      </div>
+    </div>
+    <div class="section">
+      <div class="filters-actions">
+        <input type="text" id="searchInput" placeholder="Buscar receita...">
+        <select id="typeFilter">
+            <option value="todos">Todos os tipos</option>
+            <option value="doce">Doce</option>
+            <option value="salgado">Salgado</option>
+            <option value="outros">Outros</option>
+        </select>
+        <!-- Botão flutuante de "Adicionar Receita" -->
+        <div class="icone_botao add" id="abrirModalBtn" role="button" tabindex="0">
+          <img src="/static/imagens/mais.png" alt="Ícone de adicionar receita" />
+          <span class="caixa_de_texto_botao">Adicionar Receita</span>
+        </div>
+        <!-- Botão flutuante de "Excluir Receita" -->
+        <div class="icone_botao delete" id="deleteRecipeBtn" role="button" tabindex="0">
+          <img src="/static/imagens/lixeira.png" alt="Ícone de excluir receita" />
+          <span class="caixa_de_texto_botao">Excluir Receita</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section">
+              <!-- Botão flutuante de "Excluir Receita" -->
+
+      <div id="recipesList"></div>
+    </div>
+  </div>
+
+  <!-- Modal de visualizar receitas -->
+  <div id="recipeModal" class="modal_receitas">
+    <div class="modal_receitas-content">
+      <div class="modal_receitas-header">
+        <h2 id="modalTitle">Título da Receita</h2>
+        <span id="closeModal" class="close-btn">&times;</span>
+      </div>
+      <div class="modal_receitas-info">
+        <div class="info-card">
+          <img src="/static/imagens/pessoas.png" alt="Porções" class="info-icon">
+          <div>
+            <p class="info-label">Porções</p>
+            <p id="modalPortions" class="info-value">--</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <img src="/static/imagens/relogio.png" alt="Tempo de Preparo" class="info-icon">
+          <div>
+            <p class="info-label">Tempo de Preparo</p>
+            <p id="modalPrepTime" class="info-value">--</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal_receitas-columns">
+        <div class="modal_receitas-section">
+          <h3>Ingredientes</h3>
+          <ul id="modalIngredients" class="custom-list"></ul>
+        </div>
+      </div>
+      <div class="modal_receitas-section">
+        <h3>Modo de Preparo</h3>
+        <ol id="modalPreparation" class="modal_receitas-list"></ol>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal de Exclusão -->
+<div id="modalExcluir" class="modal-adicionar hidden" role="dialog" aria-modal="true" aria-labelledby="tituloModalExcluir">
+  <div class="modal-conteudo" onclick="event.stopPropagation()">
+    <h2 id="tituloModalExcluir">Excluir Receita</h2>
+    <label for="pesquisaExcluir">Buscar Receita:</label>
+    <input
+      type="text"
+      id="pesquisaExcluir"
+      placeholder="Digite o nome da receita..."
+      autocomplete="off"
+    />
+    <div id="listaReceitasExcluir" class="lista-receitas"></div>
+    <button id="confirmarExclusao" class="hidden" disabled>Excluir</button>
+  <button type="button" id="botaoFecharModal" onclick="fecharModalExcluir()">Fechar</button>
+  </div>
+</div>
+
+<!-- Modal de Sucesso da Exclusão -->
+<div id="modalSucessoExcluir" class="modal-sucesso" style="display: none;" role="alert" aria-live="polite">
+  <img src="/static/imagens/lixeira.png" alt="Ícone de exclusão bem-sucedida" class="icone-cifrao" />
+  <span id="mensagemSucessoExcluir">Receita excluída com sucesso!</span>
+</div>
+
+
+<!-- Modal de Adicionar Receita -->
+<div id="modalAdicionar" class="modal hidden">
+  <div class="modal-conteudo">
+    <h2>Adicionar Nova Receita</h2>
+    <form id="formReceita">
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" name="titulo" required>
+
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" name="tipo" required>
+        <option value="doce">Doce</option>
+        <option value="salgado">Salgado</option>
+        <option value="outros">Outros</option>
+      </select>
+      <label for="ingredientes">Ingredientes:</label>
+      <div id="ingredientesContainer">
+        <!-- Campos de ingrediente são adicionados via JS -->
+      </div>
+      <button type="button" id="addIngredienteBtn" class="botao-acao">+ Adicionar Ingrediente</button>
+      <label for="modo_preparo">Modo de Preparo:</label>
+      <div id="modoContainer">
+        <!-- Passos são adicionados via JS -->
+      </div>
+      <button type="button" id="addPassoBtn" class="botao-acao">+ Adicionar Passo</button>
+      <label for="tempo">Tempo de Preparo:</label>
+      <input type="text" id="tempo" name="tempo" required>
+      <label for="porcoes">Porções:</label>
+      <input type="text" id="porcoes" name="porcoes" required>
+      <button type="submit">Salvar</button>
+      <button type="button" id="fecharModalBtn">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+
+
+  <footer>
+    <div class="footer-content">
+      <p>Feito com ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/minhas_receitas.js"></script>
+</body>
+</html>

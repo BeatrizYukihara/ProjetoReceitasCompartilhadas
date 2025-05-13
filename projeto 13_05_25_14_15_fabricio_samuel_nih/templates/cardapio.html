@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardápio Semanal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/css_geral/reset.css">
+  <link rel="stylesheet" href="/static/css/css_geral/global.css">
+  <link rel="stylesheet" href="/static/css/css_geral/header_and_footer.css">
+  <link rel="stylesheet" href="/static/css/css_geral/container.css">
+  <link rel="stylesheet" href="/static/css/css_geral/navigation.css">
+  <link rel="stylesheet" href="/static/css/css_geral/botoes.css">
+  <link rel="stylesheet" href="/static/css/css_cardapio/menu.css">
+  <link rel="stylesheet" href="/static/css/css_cardapio/modal.css">
+  <link rel="stylesheet" href="/static/css/css_cardapio/config_botoes.css">
+  <link rel="stylesheet" href="/static/css/css_cardapio/modal2.css">
+  <script src="https://unpkg.com/alpinejs" defer></script>
+</head>
+<body  x-data="menuPlanner()" x-init="init()">
+
+  <header>
+    <div class="header-content">
+      <h1 class="header-title" id="usuarioTitulo" data-nome="{{ nome_usuario|e }}" data-id="{{ id_usuario }}"></h1>
+    </div>
+  </header>
+
+  <div class="logo-circle">
+    <img src="/static/imagens/Logo_site_trabalho.png" alt="Logo do Site"/>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="nav-options">
+        <a href="/minhas_receitas" class="option">Minhas Receitas</a>
+        <a href="/precificar" class="option">Precificar Receita</a>
+        <span class="option active">Cardápio Semanal</span>
+        <a href="/meu_perfil" class="option">Meu Perfil</a>
+      </div>
+    </div>
+
+    <div class="botoes-lado-a-lado">
+      <div class="icone_botao add" id="addRecipeBtn" @click="abrirModalAdicionar">
+          <img src="/static/imagens/mais.png" alt="Adicionar Refeição" class="img-add">
+          <span class="caixa_de_texto_botao">Adicionar Refeição</span>
+      </div>
+    
+      <div class="icone_botao prancheta" id="lista_de_compras" @click="abrirModalCompras">
+          <img src="/static/imagens/prancheta.png" alt="Lista de Compras" class="img-prancheta">
+          <span class="caixa_de_texto_botao">Lista de compras semanal</span>
+        </div>
+    </div>
+    
+    <div class="weekly-menu">
+      <div class="grid-colunas">
+        <div class="linha-header">
+          <div class="celula-label"></div>
+          <div class="celula-dia">Segunda</div>
+          <div class="celula-dia">Terça</div>
+          <div class="celula-dia">Quarta</div>
+          <div class="celula-dia">Quinta</div>
+          <div class="celula-dia">Sexta</div>
+          <div class="celula-dia">Sábado</div>
+          <div class="celula-dia">Domingo</div>
+        </div>
+    
+    <!-- Tabela do cardápio -->
+          <div class="linha-refeicao">
+            <div class="celula-label">Café da Manhã</div>
+            <template x-for="dia in dias" :key="dia">
+              <div class="celula-item">
+                <template x-if="cardapio[dia]['Café da Manhã'].length > 0">
+                  <ul class="receita-item">
+                    <template x-for="(agrupados, titulo) in agruparReceitas(cardapio[dia]['Café da Manhã'])" :key="titulo">
+                      <li>
+                        <span x-text="`${agrupados.length}x ${titulo}`"></span>
+                        <button @click="removerReceita(dia, 'Almoço', cardapio[dia]['Almoço'].indexOf(agrupados[0]))">❌</button>
+                      </li>
+                    </template>
+                  </ul>
+                </template>
+                <template x-if="cardapio[dia]['Café da Manhã'].length === 0">
+                  <span></span>
+                </template>
+              </div>
+            </template>
+          </div>
+
+          <div class="linha-refeicao">
+            <div class="celula-label">Almoço</div>
+            <template x-for="dia in dias" :key="dia">
+              <div class="celula-item">
+                <template x-if="cardapio[dia]['Almoço'].length > 0">
+                  <ul class="receita-item">
+                    <template x-for="(agrupados, titulo) in agruparReceitas(cardapio[dia]['Almoço'])" :key="titulo">
+                      <li>
+                        <span x-text="`${agrupados.length}x ${titulo}`"></span>
+                        <button @click="removerReceita(dia, 'Almoço', cardapio[dia]['Almoço'].indexOf(agrupados[0]))">❌</button>
+                      </li>
+                    </template>
+                  </ul>
+                </template>
+                <template x-if="cardapio[dia]['Almoço'].length === 0">
+                  <span></span>
+                </template>
+              </div>
+            </template>
+          </div>
+
+          <div class="linha-refeicao">
+            <div class="celula-label">Jantar</div>
+            <template x-for="dia in dias" :key="dia">
+              <div class="celula-item">
+                <template x-if="cardapio[dia]['Jantar'].length > 0">
+                  <ul class="receita-item">
+                    <template x-for="(agrupados, titulo) in agruparReceitas(cardapio[dia]['Jantar'])" :key="titulo">
+                      <li>
+                        <span x-text="`${agrupados.length}x ${titulo}`"></span>
+                        <button @click="removerReceita(dia, 'Almoço', cardapio[dia]['Almoço'].indexOf(agrupados[0]))">❌</button>
+                      </li>
+                    </template>                                    
+                  </ul>
+                </template>
+                <template x-if="cardapio[dia]['Jantar'].length === 0">
+                  <span></span>
+                </template>
+              </div>
+            </template>
+          </div>
+
+        </div>
+      </div>
+
+
+
+  <!-- Modal para adicionar refeições -->
+    <div class="modal" x-show="mostrarModal" x-cloak>
+      <div class="modal-content">
+        <h3>Adicionar Refeições</h3>
+
+        <label>Dia da Semana:</label>
+        <select x-model="novoDia">
+          <template x-for="dia in dias" :key="dia">
+            <option x-text="dia"></option>
+          </template>
+        </select>
+
+        <label style="margin-top: 0.5rem;">Tipo de Refeição:</label>
+        <select x-model="novaRefeicao">
+          <option value="Café da Manhã">Café da Manhã</option>
+          <option value="Almoço">Almoço</option>
+          <option value="Jantar">Jantar</option>
+        </select>
+
+        <label style="margin-top: 0.5rem;">Receitas:</label>
+        <template x-for="(receita, index) in novasReceitas" :key="index">
+          <div style="display: flex; align-items: center; margin-top: 0.3rem;">
+            <div x-data="{ termo: novasReceitas[index], aberto: false }" class="autocomplete-container">
+              <input
+                type="text"
+                :value="obterTituloPorId(novasReceitas[index])"
+                @input.debounce.300ms="atualizarReceitaDigitada($event.target.value, index)"
+                @focus="aberto = true"
+                @click.away="aberto = false"
+                placeholder="Digite ou selecione uma receita"
+                class="autocomplete-input"
+              />
+              <ul x-show="aberto" class="autocomplete-list">
+                <template x-for="item in filtrarReceitas(index)" :key="item.id">
+                  <li
+                    @click="novasReceitas[index] = item.id.toString(); aberto = false"
+                    x-text="item.titulo"
+                    class="autocomplete-item"
+                  ></li>
+                </template>
+                
+              </ul>
+            </div>
+            <button @click="removerLinhaReceita(index)" style="margin-left: 0.5rem;">🗑️</button>
+          </div>
+        </template>
+        
+        <button @click="adicionarLinhaReceita" style="margin-top: 0.5rem;">+ Adicionar mais</button>
+
+        <div style="margin-top: 1rem; text-align: right;">
+          <button @click="mostrarModal = false">Cancelar</button>
+          <button type="button" @click="adicionarReceita">Adicionar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Lista de Compras -->
+    <div x-show="mostrarModalCompras" class="modal2-overlay" style="display: none;">
+      <div class="modal2-conteudo">
+        <h2 class="modal2-titulo">Lista de Compras</h2>
+        <ul class="modal2-lista">
+          <template x-for="item in listaDeCompras" :key="item">
+            <li class="modal2-item">• <span x-text="item"></span></li>
+          </template>
+        </ul>
+        <button @click="mostrarModalCompras = false" class="botao-fechar-modal2">
+          Fechar
+        </button>
+      </div>
+    </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>Feito com ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/js_cardapio.js"></script>
+
+</body>
+</html>

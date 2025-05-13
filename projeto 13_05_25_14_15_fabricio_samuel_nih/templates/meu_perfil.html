@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minhas Receitas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/css_geral/reset.css">
+  <link rel="stylesheet" href="/static/css/css_geral/global.css">
+  <link rel="stylesheet" href="/static/css/css_geral/header_and_footer.css">
+  <link rel="stylesheet" href="/static/css/css_geral/container.css">
+  <link rel="stylesheet" href="/static/css/css_geral/navigation.css">
+  <link rel="stylesheet" href="/static/css/css_geral/botoes.css">
+  <link rel="stylesheet" href="/static/css/css_meu_perfil/configuracoes.css">
+  <link rel="stylesheet" href="/static/css/css_meu_perfil/modal_edicao_e_exclusao.css">
+  <link rel="stylesheet" href="/static/css/css_meu_perfil/modal_sucesso.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="header-title" id="usuarioTitulo">Olá, {{ nome_usuario }}!</div>
+    </div>
+  </header>
+
+  <div class="logo-circle">
+    <img src="/static/imagens/Logo_site_trabalho.png" alt="Logo do Site"/>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="nav-options">
+        <a href="/minhas_receitas" class="option">Minhas Receitas</a>
+        <a href="/precificar" class="option">Precificar Receita</a>
+        <a href="/cardapio" class="option">Cardápio Semanal</a>
+        <span class="option active">Meu Perfil</span>
+      </div>
+    </div>
+ <!--
+    <div class="perfil-opcoes">
+         Bloco: Foto + Botões 
+        <div class="foto-e-botoes">
+          <img src="{{ foto_usuario }}" alt="Foto do Usuário" class="foto-usuario">
+       -->
+          <div class="botoes-perfil">
+            <button class="botao-editar" id="editarPerfilBtn">Editar Perfil</button>
+            <button class="botao-excluir" id="excluirPerfilBtn">Excluir Perfil</button>
+          </div>
+        
+        <!-- Bloco: Sobre Mim -->
+        <div class="perfil-info">
+          <h2>Sobre mim</h2>
+          <p><strong>Nome:</strong> {{ nome_usuario }}</p>
+          <p><strong>Email:</strong> {{ email_usuario }}</p>
+         <!-- <strong>Telefone:</strong> {{ telefone_usuario }}</p> -->
+          <p><strong>Receitas Criadas:</strong> {{ receitas_criadas }}</p>
+          <p><strong>Prato Favorito:</strong> {{ prato_favorito }}</p>
+        </div>
+      </div>
+  </div>
+</div>
+
+  <!-- Modal de Edição de Perfil -->
+<div id="modalEditarPerfil" class="modal hidden">
+    <div class="modal-conteudo">
+      <h2>Editar Perfil</h2>
+      <form id="formEditarPerfil">
+        <label for="nomeUsuario">Nome:</label>
+        <input type="text" id="nomeUsuario" name="nomeUsuario" value="{{ nome_usuario }}">
+  
+        <label for="emailUsuario">Email:</label>
+        <input type="email" id="emailUsuario" name="emailUsuario" value="{{ email_usuario }}">
+  <!--
+        <label for="telefoneUsuario">Telefone:</label>
+        <input type="number" id="telefoneUsuario" name="telefoneUsuario" value="{{ telefone_usuario }}">
+      -->
+        <label for="pratoFavorito">Prato Favorito:</label>
+        <input type="text" id="pratoFavorito" name="pratoFavorito" value="{{ prato_favorito }}">
+  <!--
+        <label for="fotoPerfil">Foto do Perfil:</label>
+        <select id="fotoPerfil" name="fotoPerfil">
+          <option value="static/imagens/usuario.png" {% if foto_usuario == 'static/imagens/usuario.png' %}selected{% endif %}>Imagem 1</option>
+          <option value="static/imagens/usuario2.png" {% if foto_usuario == 'static/imagens/usuario2.png' %}selected{% endif %}>Imagem 2</option>
+          <option value="static/imagens/usuario3.png" {% if foto_usuario == 'static/imagens/usuario3.png' %}selected{% endif %}>Imagem 3</option>
+        </select>
+      -->
+        <button type="submit">Salvar</button>
+        <button type="button" id="fecharModalBtn">Fechar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Sucesso da Mudança de Perfil -->
+  <div id="modalSucessoPerfil" class="modal-sucesso hidden" role="alert" aria-live="polite">
+      <img src="/static/imagens/pessoas.png" alt="Ícone de sucesso" class="icone-cifrao" />
+      <span id="mensagemSucessoPerfil">Perfil atualizado com sucesso!</span>
+  </div>
+
+  
+  <!-- Modal de Confirmação de Exclusão -->
+    <div id="modalConfirmarExclusao" class="modal hidden">
+        <div class="modal-conteudo">
+        <h2>Tem certeza que deseja excluir seu perfil?</h2>
+        <p>Essa ação não poderá ser desfeita.</p>
+        <div class="botoes-confirmacao">
+            <button id="confirmarExclusaoBtn" class="btn-danger">Excluir</button>
+            <button id="cancelarExclusaoBtn">Cancelar</button>
+        </div>
+        </div>
+    </div>
+  </div>
+  
+
+  <footer>
+    <div class="footer-content">
+      <p>Feito com ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/js_meu_perfil.js"></script>
+</body>
+</html>

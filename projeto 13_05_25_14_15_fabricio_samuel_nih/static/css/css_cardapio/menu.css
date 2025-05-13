@@ -1,0 +1,93 @@
+/* 
+  MENU STYLE - define o layout do cardápio semanal
+*/
+
+/* Quadro Inteiro */
+.grid-colunas {
+  display: grid;           /* Define o layout como grid (uma tabela de blocos) */
+  gap: 0.8rem;             /* Espaço entre as linhas do grid */
+  padding-bottom: 2rem;    /* Espaço inferior após o grid */
+  min-height: 60vh;        /* Garante que o grid tenha no mínimo 60% da altura da tela */
+}
+
+/* Linha header = linha com os dias da semana (segunda, terça, etc.)
+   Linha refeicao = linha com as refeições (almoço, janta, etc.) */
+.linha-header,
+.linha-refeicao {
+  display: grid;                               /* Faz com que cada linha seja um grid */
+  grid-template-columns: 1fr repeat(7, 1fr);   /* Primeira coluna para o nome da refeição, as outras 7 para os dias */
+  gap: 0.5rem;                                /* Espaço entre as colunas */
+}
+
+/* Primeira célula das linhas (onde aparecem as refeições),
+   Ela tem uma formatação diferente das demais porque é um rótulo */
+.celula-label {
+  font-weight: bold;                          /* Deixa o texto em negrito */
+  text-align: left;                           /* Alinha o texto à esquerda */
+  padding: 1.2rem 0.5rem;                      /* Dá um espaçamento interno maior */
+  display: flex;                              /* Usando flexbox para organizar o conteúdo */
+  align-items: center;                        /* Centraliza o conteúdo verticalmente */
+}
+
+/* Representa os dias da semana (segunda, terça, etc.)
+   Eles têm uma formatação diferente porque são rótulos */
+.celula-dia {
+  background-color: #fff;    /* Cor de fundo branca */
+  border-radius: 8px;        /* Bordas arredondadas */
+  padding: 1.2rem;           /* Dá um bom espaçamento interno */
+  text-align: center;        /* Centraliza o texto dentro da célula */
+  border: 1px solid #ccc;    /* Borda suave de cor cinza clara */
+}
+
+/* Coloca uma cor diferente nos dias da semana para destacá-los */
+.linha-header .celula-dia {
+  background-color: #f0f0f0;  /* Cor de fundo diferenciada para os dias da semana */
+  font-weight: bold;          /* Deixa o texto em negrito */
+}
+
+/* Caixinhas onde ficam as receitas selecionadas */
+.celula-item {
+  background-color: #fff;    /* Cor de fundo branca */
+  border-radius: 8px;        /* Bordas arredondadas */
+  padding: 0.5rem 0.3rem;    /* Adiciona 0.5rem de espaço acima e abaixo, e 0.3rem à esquerda e à direita */
+  border: 1px solid #ccc;    /* Borda cinza clara */
+  word-wrap: break-word;     /* Faz com que o texto quebre em várias linhas quando necessário */
+  white-space: normal;       /* Garante que o texto quebre corretamente */
+  display: flex;             /* Usando flexbox para organizar o conteúdo */
+  flex-direction: column;    /* Organiza o conteúdo verticalmente */
+  justify-content: center;   /* Centraliza o conteúdo dentro da célula */
+  min-height: 155px;         /* Define uma altura mínima para a célula */
+  overflow-wrap: break-word; /* Quebra palavras longas para que o texto não ultrapasse o limite da célula */
+}
+
+/* Organiza os itens dentro de cada receita */
+.receita-item {
+  display: flex;             /* Usa flexbox para organizar os itens */
+  flex-direction: column;    /* Organiza os itens em coluna */
+  align-items: flex-start;   /* Alinha o conteúdo à esquerda */
+  justify-content: center;   /* Centraliza os itens verticalmente */
+  gap: 0.5rem;               /* Dá um pequeno espaço entre os itens */
+}
+
+/* Estilo para cada item da lista de receitas */
+.receita-item li {
+  list-style-position: inside;  /* Faz com que os pontos da lista fiquem dentro do bloco */
+  word-break: break-word;       /* Faz com que palavras grandes quebrem quando necessário */
+  white-space: normal;          /* Permite que o texto quebre dentro da célula */
+  overflow-wrap: break-word;    /* Quebra palavras longas para que não ultrapassem os limites */
+  text-align: left;             /* Alinha o texto à esquerda */
+  font-size: 0.9rem;            /* Define o tamanho da fonte */
+}
+
+/* Estilo para mudar a cor dos pontos (bullet points) na lista */
+.receita-item li::marker {
+  color: #d6a438; /* Muda a cor dos pontos para um tom dourado */
+}
+
+/* Responsividade: em telas menores (até 768px), o layout se ajusta */
+@media (max-width: 768px) {
+  .linha-header,
+  .linha-refeicao {
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Reduz de 8 para 4 colunas para facilitar a visualização em telas pequenas */
+  }
+}
