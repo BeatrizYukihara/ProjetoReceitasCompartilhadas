@@ -27,7 +27,7 @@ def cadastrar_usuario():
 
         # Verifica se o email já existe
         if usuario_dao.email_existe(email):
-            flash('Email já está cadastrado.')
+            flash('Email já está cadastrado.📩')
             return render_template('cadastro.html')
 
         try:
@@ -44,11 +44,11 @@ def cadastrar_usuario():
             # Insere no banco
             usuario_dao.inserir(novo_usuario)
 
-            flash('Paciente usuario cadastrado com sucesso!')
+            flash(' Usuario cadastrado com sucesso! 🧑‍🍳👩‍🍳')
             return redirect(url_for('login'))
         except Exception as e:
             print(f"Erro ao cadastrar: {e}")
-            flash('Ocorreu um erro ao cadastrar o paciente. Tente novamente.')
+            flash('Ocorreu um erro ao cadastrar o paciente. Tente novamente.❌')
             return render_template('cadastro.html')
 
     return render_template('cadastro.html')
@@ -78,11 +78,9 @@ def login():
                 session['usuario_id'] = usuario.id
                 session['usuario_nome'] = usuario.nome
                 session['email_usuario'] = usuario.email
-
-                flash('Login bem-sucedido!')
                 return redirect(url_for('minhas_receitas', id_usuario=usuario.id, nome_usuario=usuario.nome,email_email=usuario.email))
         # Caso não encontre o usuário ou a senha não corresponda
-        flash('Login inválido. Verifique suas credenciais.')
+        flash('Login inválido. Verifique suas credenciais ❌.')
         return redirect(url_for('login'))
     return render_template('login.html')
 
@@ -117,7 +115,10 @@ def minhas_receitas():
     nome_usuario = session['usuario_nome']
     if 'usuario_id' not in session:
         return redirect(url_for('login'))
-    return render_template('minhas_receitas.html', nome_usuario=nome_usuario, id_usuario=id_usuario)
+    else:
+        flash('Login bem-sucedido!')
+        return render_template('minhas_receitas.html', nome_usuario=nome_usuario, id_usuario=id_usuario)
+
 
 
 
@@ -202,20 +203,7 @@ def remover_cardapio():
     return jsonify({"sucesso": sucesso})
 
 #=======================================ROTAS MEU PERFIL===========================================
-'''
-@app.route('/meu_perfil')
-def perfil():
-    if 'usuario_id' not in session:
-        return redirect(url_for('login'))
 
-    return render_template(
-        'meu_perfil.html',
-        nome_usuario=session.get('usuario_nome'),
-        email_usuario=session.get('email_usuario'),
-        receitas_criadas=usuario_dao.contar_receitas_do_usuario(session['usuario_id']),
-    )
-
-'''
 @app.route('/meu_perfil')
 def perfil():
     if 'usuario_id' not in session:
