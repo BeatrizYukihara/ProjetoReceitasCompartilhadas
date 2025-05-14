@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Pegando o ID do usuário do atributo 'data-id' no elemento com id 'usuarioTitulo'
+  const usuarioId = document.getElementById('usuarioTitulo').getAttribute('data-id');
+
+  if (!usuarioId) {
+    console.error("ID do usuário não encontrado.");
+    return;  // Se o ID não for encontrado, interrompe a execução
+  }
+
+  console.log("ID do usuário:", usuarioId);  // Verifique se o ID está correto no console
+
   const editarPerfilBtn = document.getElementById('editarPerfilBtn');
   const excluirPerfilBtn = document.getElementById('excluirPerfilBtn');
   const modalEditarPerfil = document.getElementById('modalEditarPerfil');
@@ -8,16 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalConfirmarExclusao = document.getElementById('modalConfirmarExclusao');
   const confirmarExclusaoBtn = document.getElementById('confirmarExclusaoBtn');
   const cancelarExclusaoBtn = document.getElementById('cancelarExclusaoBtn');
-
-  // Pegando o ID do usuário do atributo 'data-id'
-
-
-  if (!usuarioId) {
-    console.error("ID do usuário não encontrado.");
-    return;  // Se o ID não for encontrado, interrompe a execução
-  }
-
-  console.log("ID do usuário:", usuarioId);  // Verifique se o ID está correto no console
 
   //========================= EDIÇÃO DE PERFIL =========================
   editarPerfilBtn.addEventListener('click', () => {
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch('/excluir_conta', {
       method: 'POST',
-      body: JSON.stringify({ id_usuario }),  // Envia o ID corretamente
+      body: JSON.stringify({ usuario_id: usuarioId }),  // Envia o ID corretamente
       headers: {
         'Content-Type': 'application/json',
       }
@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(error => console.error('Erro ao excluir conta:', error));
   });
 });
+
 
 
 
